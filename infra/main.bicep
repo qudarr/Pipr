@@ -121,6 +121,18 @@ resource webApp 'Microsoft.Web/sites@2023-12-01' = {
           name: 'NODE_ENV'
           value: 'production'
         }
+        {
+          name: 'SCM_DO_BUILD_DURING_DEPLOYMENT'
+          value: 'true'
+        }
+        {
+          name: 'ENABLE_ORYX_BUILD'
+          value: 'true'
+        }
+        {
+          name: 'NPM_CONFIG_PRODUCTION'
+          value: 'false'
+        }
       ]
     }
   }
