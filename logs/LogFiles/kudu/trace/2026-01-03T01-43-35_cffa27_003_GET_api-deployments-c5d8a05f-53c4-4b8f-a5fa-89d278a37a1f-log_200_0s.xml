@@ -1,0 +1,7 @@
+<step title="Incoming Request" date="2026-01-03T01:43:35.956" instance="cffa27" url="/api/deployments/c5d8a05f-53c4-4b8f-a5fa-89d278a37a1f/log" method="GET" type="request" pid="831,1,5" Accept="*/*" Host="pipr-app.scm.azurewebsites.net" User-Agent="AZURECLI/2.75.0 (MSI)" Accept-Encoding="gzip, deflate" Authorization="Bea..." x-ms-client-request-id="83c115ef-e845-11f0-bba6-010101010000" X-ARR-LOG-ID="83c115ef-e845-11f0-bba6-010101010000" CLIENT-IP="20.110.218.7:11082" X-SITE-DEPLOYMENT-ID="pipr-app" WAS-DEFAULT-HOSTNAME="pipr-app.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/api/deployments/c5d8a05f-53c4-4b8f-a5fa-89d278a37a1f/log" X-Client-IP="20.110.218.7" X-Client-Port="11082" >
+  <step title="Cleanup Xml Logs" date="2026-01-03T01:43:35.959" /><!-- duration: 5ms -->
+  <step title="DeploymentService.GetLogEntry" date="2026-01-03T01:43:35.993" >
+    <step title="DeploymentManager.GetLogEntries(id:c5d8a05f-53c4-4b8f-a5fa-89d278a37a1f)" date="2026-01-03T01:43:35.999" /><!-- duration: 52ms -->
+  </step><!-- duration: 63ms -->
+  <step title="Outgoing response" date="2026-01-03T01:43:36.070" type="response" statusCode="200" statusText="OK" /><!-- duration: 8ms -->
+</step><!-- duration: 129ms -->

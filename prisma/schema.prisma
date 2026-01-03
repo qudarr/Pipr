@@ -1,0 +1,125 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "windows", "debian-openssl-3.0.x", "linux-arm64-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ThemePreference {
+  system
+  light
+  dark
+}
+
+enum MemberRole {
+  owner
+  member
+}
+
+enum InviteStatus {
+  pending
+  accepted
+  expired
+}
+
+enum FeedType {
+  bottle
+  breast
+}
+
+enum BottleType {
+  Formula
+  Breastmilk
+}
+
+enum BreastSide {
+  Left
+  Right
+}
+
+model User {
+  id             String            @id @default(cuid())
+  externalSubject String            @unique
+  email          String?
+  displayName    String?
+  themePref      ThemePreference   @default(system)
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+  memberships    FamilyMembership[]
+  feedEvents     FeedEvent[]       @relation("UserFeedEvents")
+}
+
+model FamilySpace {
+  id           String             @id @default(cuid())
+  name         String
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
+  memberships  FamilyMembership[]
+  invites      Invite[]
+  babies       Baby[]
+  feedEvents   FeedEvent[]
+}
+
+model FamilyMembership {
+  id             String       @id @default(cuid())
+  user           User         @relation(fields: [userId], references: [id])
+  userId         String
+  familySpace    FamilySpace  @relation(fields: [familySpaceId], references: [id])
+  familySpaceId  String
+  role           MemberRole   @default(member)
+  createdAt      DateTime     @default(now())
+
+  @@unique([userId, familySpaceId])
+}
+
+model Invite {
+  id              String        @id @default(cuid())
+  familySpace     FamilySpace   @relation(fields: [familySpaceId], references: [id])
+  familySpaceId   String
+  emailNormalized String
+  tokenHash       String
+  status          InviteStatus  @default(pending)
+  expiresAt       DateTime
+  createdAt       DateTime      @default(now())
+
+  @@index([emailNormalized])
+}
+
+model Baby {
+  id            String        @id @default(cuid())
+  familySpace   FamilySpace   @relation(fields: [familySpaceId], references: [id])
+  familySpaceId String
+  name          String
+  birthdate     DateTime?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  feedEvents    FeedEvent[]
+}
+
+model FeedEvent {
+  id               String         @id @default(cuid())
+  familySpace      FamilySpace    @relation(fields: [familySpaceId], references: [id])
+  familySpaceId    String
+  baby             Baby           @relation(fields: [babyId], references: [id])
+  babyId           String
+  occurredAt       DateTime       @default(now())
+  type             FeedType
+  createdBy        User           @relation("UserFeedEvents", fields: [createdByUserId], references: [id])
+  createdByUserId  String
+  notes            String?
+  bottleAmountMl   Int?
+  bottleType       BottleType?
+  firstSide        BreastSide?
+  firstDurationSec Int?
+  secondDurationSec Int?
+  totalDurationSec Int?
+  autoSwitchUsed   Boolean        @default(false)
+  autoStopUsed     Boolean        @default(false)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  @@index([familySpaceId, babyId, occurredAt])
+}

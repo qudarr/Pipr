@@ -1,0 +1,129 @@
+2026-01-02T08:27:45.7183374Z,Updating submodules.,f8d4db08-f7b3-4869-a3d1-83320fb94f2c,0
+2026-01-02T08:27:46.8469404Z,Preparing deployment for commit id 'c5d8a05f-5'.,827cf524-8dac-4074-a43a-7ae62deef914,0
+2026-01-02T08:27:47.2251921Z,PreDeployment: context.CleanOutputPath False,ad1da09b-641d-4dbb-8519-54b866b681e6,0
+2026-01-02T08:27:47.4120244Z,PreDeployment: context.OutputPath /home/site/wwwroot,f89cf1c9-7e41-4c1b-baaa-76bb6650f3d8,0
+2026-01-02T08:27:47.5902334Z,Repository path is /tmp/zipdeploy/extracted,53e68fad-94c3-4bcc-913f-d12b19e1f547,0
+2026-01-02T08:27:47.7389960Z,Running oryx build...,94163dfd-8486-4848-ae18-a8384bb36c5e,0
+	2026-01-02T08:27:47.7923638Z,Command: oryx build /tmp/zipdeploy/extracted -o /home/site/wwwroot --platform nodejs --platform-version 20 -p virtualenv_name= --log-file /tmp/build-debug.log  -i /tmp/8de49d8cf256720 -p compress_node_modules=tar-gz | tee /tmp/oryx-build.log,,0
+	2026-01-02T08:27:50.6205731Z,Operation performed by Microsoft Oryx&comma; https://github.com/Microsoft/Oryx,,0
+	2026-01-02T08:27:50.6883066Z,You can report issues at https://github.com/Microsoft/Oryx/issues,,0
+	2026-01-02T08:27:50.7562896Z,,,0
+	2026-01-02T08:27:50.7871345Z,Oryx Version: 0.2.20251022.1+bef98bc7139feefaa74be16de9d835e2c85385d4&comma; Commit: bef98bc7139feefaa74be16de9d835e2c85385d4&comma; ReleaseTagName: 20251022.1,,0
+	2026-01-02T08:27:50.8915281Z,,,0
+	2026-01-02T08:27:50.9218548Z,Build Operation ID: ddb9b643783cba7f,,0
+	2026-01-02T08:27:50.9663268Z,Repository Commit : c5d8a05f-53c4-4b8f-a5fa-89d278a37a1f,,0
+	2026-01-02T08:27:51.0056839Z,OS Type           : bookworm,,0
+	2026-01-02T08:27:51.0429751Z,Image Type        : githubactions,,0
+	2026-01-02T08:27:51.0737881Z,,,0
+	2026-01-02T08:27:51.1209338Z,Primary SDK Storage URL: https://oryx-cdn.microsoft.io,,0
+	2026-01-02T08:27:51.1715767Z,Backup SDK Storage URL: ,,0
+	2026-01-02T08:27:51.2203272Z,Detecting platforms...,,0
+	2026-01-02T08:27:51.2875202Z,External SDK provider is enabled.,,0
+	2026-01-02T08:27:51.6793442Z,Requesting metadata for platform nodejs from external SDK provider,,0
+	2026-01-02T08:27:54.5485031Z,Requesting metadata for platform nodejs from external SDK provider,,0
+	2026-01-02T08:27:55.0598357Z,Detected following platforms:,,0
+	2026-01-02T08:27:55.1074875Z,  nodejs: 20.19.5,,0
+	2026-01-02T08:27:55.4833581Z,Detected the following frameworks: Typescript&comma;Next.js,,0
+	2026-01-02T08:27:55.9832260Z,,,0
+	2026-01-02T08:27:56.0914425Z,Using intermediate directory '/tmp/8de49d8cf256720'.,,0
+	2026-01-02T08:27:56.1317772Z,,,0
+	2026-01-02T08:27:56.1681703Z,Copying files to the intermediate directory...,,0
+	2026-01-02T08:27:56.2359015Z,Done in 0 sec(s).,,0
+	2026-01-02T08:27:56.2786678Z,,,0
+	2026-01-02T08:27:56.3270364Z,Source directory     : /tmp/8de49d8cf256720,,0
+	2026-01-02T08:27:56.3848818Z,Destination directory: /home/site/wwwroot,,0
+	2026-01-02T08:27:56.4716801Z,,,0
+	2026-01-02T08:27:57.5220163Z,Removing existing manifest file,,0
+	2026-01-02T08:27:57.5909002Z,Creating directory for command manifest file if it does not exist,,0
+	2026-01-02T08:27:57.6231154Z,Creating a manifest file...,,0
+	2026-01-02T08:27:57.7190720Z,Node Build Command Manifest file created.,,0
+	2026-01-02T08:27:57.7413849Z,,,0
+	2026-01-02T08:27:57.7911906Z,Using Node version:,,0
+	2026-01-02T08:27:57.8276241Z,v20.19.5,,0
+	2026-01-02T08:27:57.8879385Z,,,0
+	2026-01-02T08:27:57.9947728Z,Using Npm version:,,0
+	2026-01-02T08:27:58.0323686Z,10.8.2,,0
+	2026-01-02T08:27:58.1186789Z,,,0
+	2026-01-02T08:27:58.2105433Z,Running 'npm install'...,,0
+	2026-01-02T08:27:58.2672336Z,,,0
+	2026-01-02T08:30:22.0352560Z,,,0
+	2026-01-02T08:30:22.1325931Z,added 34 packages&comma; and audited 35 packages in 2m,,0
+	2026-01-02T08:30:22.2049821Z,,,0
+	2026-01-02T08:30:22.2391867Z,7 packages are looking for funding,,0
+	2026-01-02T08:30:22.2808753Z,  run `npm fund` for details,,0
+	2026-01-02T08:30:22.3123919Z,,,0
+	2026-01-02T08:30:22.3710947Z,found 0 vulnerabilities,,0
+	2026-01-02T08:30:22.4279162Z,,,0
+	2026-01-02T08:30:22.4767514Z,Running 'npm run build'...,,0
+	2026-01-02T08:30:22.5263000Z,,,0
+	2026-01-02T08:30:23.2263386Z,,,0
+	2026-01-02T08:30:23.2947120Z,> pipr@0.1.0 build,,0
+	2026-01-02T08:30:23.4203596Z,> next build,,0
+	2026-01-02T08:30:23.4801627Z,,,0
+	2026-01-02T08:30:27.2890539Z,Attention: Next.js now collects completely anonymous telemetry regarding usage.,,0
+	2026-01-02T08:30:27.3531549Z,This information is used to shape Next.js' roadmap and prioritize features.,,0
+	2026-01-02T08:30:27.3835479Z,You can learn more&comma; including how to opt-out if you'd not like to participate in this anonymous program&comma; by visiting the following URL:,,0
+	2026-01-02T08:30:27.4205188Z,https://nextjs.org/telemetry,,0
+	2026-01-02T08:30:27.4558166Z,,,0
+	2026-01-02T08:30:28.1072495Z,  ▲ Next.js 14.2.35,,0
+	2026-01-02T08:30:28.1872148Z,  - Environments: .env,,0
+	2026-01-02T08:30:28.2363344Z,,,0
+	2026-01-02T08:30:28.7620002Z,   Creating an optimized production build ...,,0
+	2026-01-02T08:31:09.5005477Z,Failed to compile.,,1
+	2026-01-02T08:31:09.5511436Z,,,1
+	2026-01-02T08:31:09.6360278Z,app/layout.tsx,,1
+	2026-01-02T08:31:09.6777021Z,An error occurred in `next/font`.,,1
+	2026-01-02T08:31:09.7639094Z,,,1
+	2026-01-02T08:31:09.7820510Z,Error: Cannot find module 'tailwindcss',,1
+	2026-01-02T08:31:09.8054190Z,Require stack:,,1
+	2026-01-02T08:31:09.8559289Z,- /tmp/8de49d8cf256720/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js,,1
+	2026-01-02T08:31:09.8841418Z,- /tmp/8de49d8cf256720/node_modules/next/dist/build/webpack/config/blocks/css/index.js,,1
+	2026-01-02T08:31:09.9093801Z,- /tmp/8de49d8cf256720/node_modules/next/dist/build/webpack/config/index.js,,1
+	2026-01-02T08:31:09.9386562Z,- /tmp/8de49d8cf256720/node_modules/next/dist/build/webpack-config.js,,1
+	2026-01-02T08:31:09.9622978Z,- /tmp/8de49d8cf256720/node_modules/next/dist/build/webpack-build/impl.js,,1
+	2026-01-02T08:31:09.9782285Z,- /tmp/8de49d8cf256720/node_modules/next/dist/compiled/jest-worker/processChild.js,,1
+	2026-01-02T08:31:10.0347534Z,    at Module._resolveFilename (node:internal/modules/cjs/loader:1207:15),,1
+	2026-01-02T08:31:10.0579149Z,    at /tmp/8de49d8cf256720/node_modules/next/dist/server/require-hook.js:55:36,,1
+	2026-01-02T08:31:10.0774806Z,    at Function.resolve (node:internal/modules/helpers:193:19),,1
+	2026-01-02T08:31:10.0952304Z,    at loadPlugin (/tmp/8de49d8cf256720/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js:49:32),,1
+	2026-01-02T08:31:10.1263962Z,    at /tmp/8de49d8cf256720/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js:157:56,,1
+	2026-01-02T08:31:10.1592692Z,    at Array.map (<anonymous>),,1
+	2026-01-02T08:31:10.1743905Z,    at getPostCssPlugins (/tmp/8de49d8cf256720/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js:157:47),,1
+	2026-01-02T08:31:10.1996925Z,    at async /tmp/8de49d8cf256720/node_modules/next/dist/build/webpack/config/blocks/css/index.js:124:36,,1
+	2026-01-02T08:31:10.2255062Z,    at async /tmp/8de49d8cf256720/node_modules/next/dist/build/webpack/loaders/next-font-loader/index.js:86:33,,1
+	2026-01-02T08:31:10.2461447Z,    at async Span.traceAsyncFn (/tmp/8de49d8cf256720/node_modules/next/dist/trace/trace.js:154:20),,1
+	2026-01-02T08:31:10.2629581Z,,,1
+	2026-01-02T08:31:10.2765428Z,./app/add-bottle/page.tsx,,1
+	2026-01-02T08:31:10.3006172Z,Module not found: Can't resolve '@/components/ui/icons',,1
+	2026-01-02T08:31:10.3295431Z,,,1
+	2026-01-02T08:31:10.3493852Z,https://nextjs.org/docs/messages/module-not-found,,1
+	2026-01-02T08:31:10.3703945Z,,,1
+	2026-01-02T08:31:10.3877775Z,./app/history/page.tsx,,1
+	2026-01-02T08:31:10.4251999Z,Module not found: Can't resolve '@/components/ui/icons',,1
+	2026-01-02T08:31:10.4386688Z,,,1
+	2026-01-02T08:31:10.4534963Z,https://nextjs.org/docs/messages/module-not-found,,1
+	2026-01-02T08:31:10.4707323Z,,,1
+	2026-01-02T08:31:10.4847843Z,./app/settings/page.tsx,,1
+	2026-01-02T08:31:10.5115628Z,Module not found: Can't resolve '@/components/ui/icons',,1
+	2026-01-02T08:31:10.5300766Z,,,1
+	2026-01-02T08:31:10.5577079Z,https://nextjs.org/docs/messages/module-not-found,,1
+	2026-01-02T08:31:10.5771625Z,,,1
+	2026-01-02T08:31:10.6158439Z,./app/settings/page.tsx,,1
+	2026-01-02T08:31:11.4204992Z,Module not found: Can't resolve '@/providers/theme-provider',,1
+	2026-01-02T08:31:11.5160687Z,,,1
+	2026-01-02T08:31:11.5657036Z,https://nextjs.org/docs/messages/module-not-found,,1
+	2026-01-02T08:31:11.6046099Z,,,1
+	2026-01-02T08:31:11.6410747Z,,,1
+	2026-01-02T08:31:11.6945626Z,> Build failed because of webpack errors,,1
+	2026-01-02T08:31:11.8631971Z,Failed to compile.\n\napp/layout.tsx\nAn error occurred in `next/font`.\n\nError: Cannot find module 'tailwindcss'\nRequire stack:\n- /tmp/8de49d8cf256720/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js\n- /tmp/8de49d8cf256720/node_modules/next/dist/build/webpack/config/blocks/css/index.js\n- /tmp/8de49d8cf256720/node_modules/next/dist/build/webpack/config/index.js\n- /tmp/8de49d8cf256720/node_modules/next/dist/build/webpack-config.js\n- /tmp/8de49d8cf256720/node_modules/next/dist/build/webpack-build/impl.js\n- /tmp/8de49d8cf256720/node_modules/next/dist/compiled/jest-worker/processChild.js\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1207:15)\n    at /tmp/8de49d8cf256720/node_modules/next/dist/server/require-hook.js:55:36\n    at Function.resolve (node:internal/modules/helpers:193:19)\n    at loadPlugin (/tmp/8de49d8cf256720/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js:49:32)\n    at /tmp/8de49d8cf256720/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js:157:56\n    at Array.map (<anonymous>)\n    at getPostCssPlugins (/tmp/8de49d8cf256720/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js:157:47)\n    at async /tmp/8de49d8cf256720/node_modules/next/dist/build/webpack/config/blocks/css/index.js:124:36\n    at async /tmp/8de49d8cf256720/node_modules/next/dist/build/webpack/loaders/next-font-loader/index.js:86:33\n    at async Span.traceAsyncFn (/tmp/8de49d8cf256720/node_modules/next/dist/trace/trace.js:154:20)\n\n./app/add-bottle/page.tsx\nModule not found: Can't resolve '@/components/ui/icons'\n\nhttps://nextjs.org/docs/messages/module-not-found\n\n./app/history/page.tsx\nModule not found: Can't resolve '@/components/ui/icons'\n\nhttps://nextjs.org/docs/messages/module-not-found\n\n./app/settings/page.tsx\nModule not found: Can't resolve '@/components/ui/icons'\n\nhttps://nextjs.org/docs/messages/module-not-found\n\n./app/settings/page.tsx\nModule not found: Can't resolve '@/providers/theme-provider'\n\nhttps://nextjs.org/docs/messages/module-not-found\n\n\n> Build failed because of webpack errors\n/bin/bash -c "oryx build /tmp/zipdeploy/extracted -o /home/site/wwwroot --platform nodejs --platform-version 20 -p virtualenv_name= --log-file /tmp/build-debug.log  -i /tmp/8de49d8cf256720 -p compress_node_modules=tar-gz | tee /tmp/oryx-build.log ; exit $PIPESTATUS ",,2
+2026-01-02T08:31:12.2059303Z,,b2a1de04-bcf0-4b01-a0a5-6dc0eb37bf13,0
+2026-01-02T08:31:12.3566525Z,Generating summary of Oryx build,c5cfbdce-9cb7-47ad-852a-e4b3dbfb3bad,0
+2026-01-02T08:31:12.5072642Z,Parsing the build logs,a2ca1a92-619d-4d39-8c38-35230914f4de,0
+2026-01-02T08:31:12.6661715Z,Found 0 issue(s),f90b9c79-032d-418d-b659-05f2d46cfe23,0
+2026-01-02T08:31:12.8830938Z,,5eaf851f-bc86-47be-8bb3-b52484452259,0
+2026-01-02T08:31:13.0167790Z,Build Summary :,2a8ccb7d-47ac-4eda-a7bc-0dee7c435265,0
+2026-01-02T08:31:13.1543138Z,===============,ae963c83-de84-448b-b496-3e823807fb3b,0
+2026-01-02T08:31:13.2790415Z,Errors (0),538c2a8c-cf94-4218-a94b-e668936fa713,0
+2026-01-02T08:31:13.4261968Z,Warnings (0),a2c27571-7e9f-41e2-8b2f-06aa70d9d0ca,0
+2026-01-02T08:31:13.6334490Z,,3042a48f-aee3-42e9-9f12-68c3be97b663,0
+2026-01-02T08:31:14.1844846Z,Deployment Failed. deployer = OneDeploy deploymentPath = OneDeploy,bb7d43e4-2082-42ee-a062-4bb44b6c2c33,0

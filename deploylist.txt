@@ -1,0 +1,5 @@
+[31;1mERROR: 'list' is misspelled or not recognized by the system.[0m
+[31;1m[0m
+[31;1mExamples from AI knowledge base:[0m
+[31;1mhttps://aka.ms/cli_ref[0m
+[31;1mRead more about the command in reference docs[0m

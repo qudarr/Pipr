@@ -1,0 +1,179 @@
+2026-01-02T08:27:42  Fetching changes.
+2026-01-02T08:27:42    Starting  LocalZipHandler
+2026-01-02T08:27:42    Cleaning up temp folders from previous zip deployments and extracting pushed zip file /tmp/zipdeploy/54f0cea3-1f0f-4d0b-ae8b-ccfbd8015be4.zip (0.07 MB) to /tmp/zipdeploy/extracted
+2026-01-02T08:27:46  Updating submodules.
+2026-01-02T08:27:46  Preparing deployment for commit id 'c5d8a05f-5'.
+2026-01-02T08:27:47  PreDeployment: context.CleanOutputPath False
+2026-01-02T08:27:47  PreDeployment: context.OutputPath /home/site/wwwroot
+2026-01-02T08:27:47  Repository path is /tmp/zipdeploy/extracted
+2026-01-02T08:27:47  Running oryx build...
+2026-01-02T08:27:47    Command: oryx build /tmp/zipdeploy/extracted -o /home/site/wwwroot --platform nodejs --platform-version 20 -p virtualenv_name= --log-file /tmp/build-debug.log  -i /tmp/8de49d8cf256720 -p compress_node_modules=tar-gz | tee /tmp/oryx-build.log
+2026-01-02T08:27:50    Operation performed by Microsoft Oryx, https://github.com/Microsoft/Oryx
+2026-01-02T08:27:50    You can report issues at https://github.com/Microsoft/Oryx/issues
+2026-01-02T08:27:50    
+2026-01-02T08:27:50    Oryx Version: 0.2.20251022.1+bef98bc7139feefaa74be16de9d835e2c85385d4, Commit: bef98bc7139feefaa74be16de9d835e2c85385d4, ReleaseTagName: 20251022.1
+2026-01-02T08:27:50    
+2026-01-02T08:27:50    Build Operation ID: ddb9b643783cba7f
+2026-01-02T08:27:50    Repository Commit : c5d8a05f-53c4-4b8f-a5fa-89d278a37a1f
+2026-01-02T08:27:51    OS Type           : bookworm
+2026-01-02T08:27:51    Image Type        : githubactions
+2026-01-02T08:27:51    
+2026-01-02T08:27:51    Primary SDK Storage URL: https://oryx-cdn.microsoft.io
+2026-01-02T08:27:51    Backup SDK Storage URL: 
+2026-01-02T08:27:51    Detecting platforms...
+2026-01-02T08:27:51    External SDK provider is enabled.
+2026-01-02T08:27:51    Requesting metadata for platform nodejs from external SDK provider
+2026-01-02T08:27:54    Requesting metadata for platform nodejs from external SDK provider
+2026-01-02T08:27:55    Detected following platforms:
+2026-01-02T08:27:55      nodejs: 20.19.5
+2026-01-02T08:27:55    Detected the following frameworks: Typescript,Next.js
+2026-01-02T08:27:56    
+2026-01-02T08:27:56    Using intermediate directory '/tmp/8de49d8cf256720'.
+2026-01-02T08:27:56    
+2026-01-02T08:27:56    Copying files to the intermediate directory...
+2026-01-02T08:27:56    Done in 0 sec(s).
+2026-01-02T08:27:56    
+2026-01-02T08:27:56    Source directory     : /tmp/8de49d8cf256720
+2026-01-02T08:27:56    Destination directory: /home/site/wwwroot
+2026-01-02T08:27:56    
+2026-01-02T08:27:57    Removing existing manifest file
+2026-01-02T08:27:57    Creating directory for command manifest file if it does not exist
+2026-01-02T08:27:57    Creating a manifest file...
+2026-01-02T08:27:57    Node Build Command Manifest file created.
+2026-01-02T08:27:57    
+2026-01-02T08:27:57    Using Node version:
+2026-01-02T08:27:57    v20.19.5
+2026-01-02T08:27:57    
+2026-01-02T08:27:58    Using Npm version:
+2026-01-02T08:27:58    10.8.2
+2026-01-02T08:27:58    
+2026-01-02T08:27:58    Running 'npm install'...
+2026-01-02T08:27:58    
+2026-01-02T08:30:22    
+2026-01-02T08:30:22    added 34 packages, and audited 35 packages in 2m
+2026-01-02T08:30:22    
+2026-01-02T08:30:22    7 packages are looking for funding
+2026-01-02T08:30:22      run `npm fund` for details
+2026-01-02T08:30:22    
+2026-01-02T08:30:22    found 0 vulnerabilities
+2026-01-02T08:30:22    
+2026-01-02T08:30:22    Running 'npm run build'...
+2026-01-02T08:30:22    
+2026-01-02T08:30:23    
+2026-01-02T08:30:23    > pipr@0.1.0 build
+2026-01-02T08:30:23    > next build
+2026-01-02T08:30:23    
+2026-01-02T08:30:27    Attention: Next.js now collects completely anonymous telemetry regarding usage.
+2026-01-02T08:30:27    This information is used to shape Next.js' roadmap and prioritize features.
+2026-01-02T08:30:27    You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+2026-01-02T08:30:27    https://nextjs.org/telemetry
+2026-01-02T08:30:27    
+2026-01-02T08:30:28      ▲ Next.js 14.2.35
+2026-01-02T08:30:28      - Environments: .env
+2026-01-02T08:30:28    
+2026-01-02T08:30:28       Creating an optimized production build ...
+2026-01-02T08:31:09    Failed to compile.
+2026-01-02T08:31:09    
+2026-01-02T08:31:09    app/layout.tsx
+2026-01-02T08:31:09    An error occurred in `next/font`.
+2026-01-02T08:31:09    
+2026-01-02T08:31:09    Error: Cannot find module 'tailwindcss'
+2026-01-02T08:31:09    Require stack:
+2026-01-02T08:31:09    - /tmp/8de49d8cf256720/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js
+2026-01-02T08:31:09    - /tmp/8de49d8cf256720/node_modules/next/dist/build/webpack/config/blocks/css/index.js
+2026-01-02T08:31:09    - /tmp/8de49d8cf256720/node_modules/next/dist/build/webpack/config/index.js
+2026-01-02T08:31:09    - /tmp/8de49d8cf256720/node_modules/next/dist/build/webpack-config.js
+2026-01-02T08:31:09    - /tmp/8de49d8cf256720/node_modules/next/dist/build/webpack-build/impl.js
+2026-01-02T08:31:10    - /tmp/8de49d8cf256720/node_modules/next/dist/compiled/jest-worker/processChild.js
+2026-01-02T08:31:10        at Module._resolveFilename (node:internal/modules/cjs/loader:1207:15)
+2026-01-02T08:31:10        at /tmp/8de49d8cf256720/node_modules/next/dist/server/require-hook.js:55:36
+2026-01-02T08:31:10        at Function.resolve (node:internal/modules/helpers:193:19)
+2026-01-02T08:31:10        at loadPlugin (/tmp/8de49d8cf256720/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js:49:32)
+2026-01-02T08:31:10        at /tmp/8de49d8cf256720/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js:157:56
+2026-01-02T08:31:10        at Array.map (<anonymous>)
+2026-01-02T08:31:10        at getPostCssPlugins (/tmp/8de49d8cf256720/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js:157:47)
+2026-01-02T08:31:10        at async /tmp/8de49d8cf256720/node_modules/next/dist/build/webpack/config/blocks/css/index.js:124:36
+2026-01-02T08:31:10        at async /tmp/8de49d8cf256720/node_modules/next/dist/build/webpack/loaders/next-font-loader/index.js:86:33
+2026-01-02T08:31:10        at async Span.traceAsyncFn (/tmp/8de49d8cf256720/node_modules/next/dist/trace/trace.js:154:20)
+2026-01-02T08:31:10    
+2026-01-02T08:31:10    ./app/add-bottle/page.tsx
+2026-01-02T08:31:10    Module not found: Can't resolve '@/components/ui/icons'
+2026-01-02T08:31:10    
+2026-01-02T08:31:10    https://nextjs.org/docs/messages/module-not-found
+2026-01-02T08:31:10    
+2026-01-02T08:31:10    ./app/history/page.tsx
+2026-01-02T08:31:10    Module not found: Can't resolve '@/components/ui/icons'
+2026-01-02T08:31:10    
+2026-01-02T08:31:10    https://nextjs.org/docs/messages/module-not-found
+2026-01-02T08:31:10    
+2026-01-02T08:31:10    ./app/settings/page.tsx
+2026-01-02T08:31:10    Module not found: Can't resolve '@/components/ui/icons'
+2026-01-02T08:31:10    
+2026-01-02T08:31:10    https://nextjs.org/docs/messages/module-not-found
+2026-01-02T08:31:10    
+2026-01-02T08:31:10    ./app/settings/page.tsx
+2026-01-02T08:31:11    Module not found: Can't resolve '@/providers/theme-provider'
+2026-01-02T08:31:11    
+2026-01-02T08:31:11    https://nextjs.org/docs/messages/module-not-found
+2026-01-02T08:31:11    
+2026-01-02T08:31:11    
+2026-01-02T08:31:11    > Build failed because of webpack errors
+2026-01-02T08:31:11    Failed to compile.
+
+app/layout.tsx
+An error occurred in `next/font`.
+
+Error: Cannot find module 'tailwindcss'
+Require stack:
+- /tmp/8de49d8cf256720/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js
+- /tmp/8de49d8cf256720/node_modules/next/dist/build/webpack/config/blocks/css/index.js
+- /tmp/8de49d8cf256720/node_modules/next/dist/build/webpack/config/index.js
+- /tmp/8de49d8cf256720/node_modules/next/dist/build/webpack-config.js
+- /tmp/8de49d8cf256720/node_modules/next/dist/build/webpack-build/impl.js
+- /tmp/8de49d8cf256720/node_modules/next/dist/compiled/jest-worker/processChild.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1207:15)
+    at /tmp/8de49d8cf256720/node_modules/next/dist/server/require-hook.js:55:36
+    at Function.resolve (node:internal/modules/helpers:193:19)
+    at loadPlugin (/tmp/8de49d8cf256720/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js:49:32)
+    at /tmp/8de49d8cf256720/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js:157:56
+    at Array.map (<anonymous>)
+    at getPostCssPlugins (/tmp/8de49d8cf256720/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js:157:47)
+    at async /tmp/8de49d8cf256720/node_modules/next/dist/build/webpack/config/blocks/css/index.js:124:36
+    at async /tmp/8de49d8cf256720/node_modules/next/dist/build/webpack/loaders/next-font-loader/index.js:86:33
+    at async Span.traceAsyncFn (/tmp/8de49d8cf256720/node_modules/next/dist/trace/trace.js:154:20)
+
+./app/add-bottle/page.tsx
+Module not found: Can't resolve '@/components/ui/icons'
+
+https://nextjs.org/docs/messages/module-not-found
+
+./app/history/page.tsx
+Module not found: Can't resolve '@/components/ui/icons'
+
+https://nextjs.org/docs/messages/module-not-found
+
+./app/settings/page.tsx
+Module not found: Can't resolve '@/components/ui/icons'
+
+https://nextjs.org/docs/messages/module-not-found
+
+./app/settings/page.tsx
+Module not found: Can't resolve '@/providers/theme-provider'
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+> Build failed because of webpack errors
+/bin/bash -c "oryx build /tmp/zipdeploy/extracted -o /home/site/wwwroot --platform nodejs --platform-version 20 -p virtualenv_name= --log-file /tmp/build-debug.log  -i /tmp/8de49d8cf256720 -p compress_node_modules=tar-gz | tee /tmp/oryx-build.log ; exit $PIPESTATUS "
+2026-01-02T08:31:11  
+2026-01-02T08:31:12  
+2026-01-02T08:31:12  Generating summary of Oryx build
+2026-01-02T08:31:12  Parsing the build logs
+2026-01-02T08:31:12  Found 0 issue(s)
+2026-01-02T08:31:12  
+2026-01-02T08:31:13  Build Summary :
+2026-01-02T08:31:13  ===============
+2026-01-02T08:31:13  Errors (0)
+2026-01-02T08:31:13  Warnings (0)
+2026-01-02T08:31:13  
+2026-01-02T08:31:14  Deployment Failed. deployer = OneDeploy deploymentPath = OneDeploy

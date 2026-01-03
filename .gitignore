@@ -1,0 +1,20 @@
+node_modules
+.next
+out
+.env
+.env.local
+.env.development
+.env.production
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+.prisma
+
+# Build artifacts
+deploy.zip
+deploy_output.txt
+appstate.txt
+*.png
+
+# Secrets
+infra/secrets.txt

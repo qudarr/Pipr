@@ -1,0 +1,368 @@
+2026-01-02T08:20:22  Startup Request, url: /api/publish?type=zip, method: POST, type: request, pid: 833,1,5, SCM_DO_BUILD_DURING_DEPLOYMENT: true, ScmType: None
+2026-01-02T08:24:33                  Error occurred, type: error, text: npm notice
+npm notice New major version of npm available! 10.8.2 -> 11.7.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.7.0
+npm notice To update run: npm install -g npm@11.7.0
+npm notice
+Failed to compile.
+
+app/layout.tsx
+An error occurred in `next/font`.
+
+Error: Cannot find module 'tailwindcss'
+Require stack:
+- /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js
+- /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/config/blocks/css/index.js
+- /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/config/index.js
+- /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack-config.js
+- /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack-build/impl.js
+- /tmp/8de49d7ca3974cf/node_modules/next/dist/compiled/jest-worker/processChild.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1207:15)
+    at /tmp/8de49d7ca3974cf/node_modules/next/dist/server/require-hook.js:55:36
+    at Function.resolve (node:internal/modules/helpers:193:19)
+    at loadPlugin (/tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js:49:32)
+    at /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js:157:56
+    at Array.map (<anonymous>)
+    at getPostCssPlugins (/tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js:157:47)
+    at async /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/config/blocks/css/index.js:124:36
+    at async /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/loaders/next-font-loader/index.js:86:33
+    at async Span.traceAsyncFn (/tmp/8de49d7ca3974cf/node_modules/next/dist/trace/trace.js:154:20)
+
+./app/add-bottle/page.tsx
+Module not found: Can't resolve '@/components/ui/icons'
+
+https://nextjs.org/docs/messages/module-not-found
+
+./app/history/page.tsx
+Module not found: Can't resolve '@/components/ui/icons'
+
+https://nextjs.org/docs/messages/module-not-found
+
+./app/settings/page.tsx
+Module not found: Can't resolve '@/components/ui/icons'
+
+https://nextjs.org/docs/messages/module-not-found
+
+./app/settings/page.tsx
+Module not found: Can't resolve '@/providers/theme-provider'
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+> Build failed because of webpack errors
+/bin/bash -c "oryx build /tmp/zipdeploy/extracted -o /home/site/wwwroot --platform nodejs --platform-version 20 -p virtualenv_name= --log-file /tmp/build-debug.log  -i /tmp/8de49d7ca3974cf -p compress_node_modules=tar-gz | tee /tmp/oryx-build.log ; exit $PIPESTATUS ", stackTrace:    at Kudu.Core.Infrastructure.Executable.ExecuteInternal(ITracer tracer, Func`2 onWriteOutput, Func`2 onWriteError, CancellationToken token, Encoding encoding, String arguments, Object[] args) in /tmp/KuduLite/Kudu.Core/Infrastructure/Executable.cs:line 239
+   at Kudu.Core.Infrastructure.Executable.ExecuteWithProgressWriter(ILogger logger, ITracer tracer, CancellationToken token, String arguments, Object[] args) in /tmp/KuduLite/Kudu.Core/Infrastructure/Executable.cs:line 118
+   at Kudu.Core.Deployment.Generator.ExternalCommandBuilder.RunCommand(DeploymentContext context, String command, Boolean ignoreManifest, CancellationToken token, String message) in /tmp/KuduLite/Kudu.Core/Deployment/Generator/ExternalCommandBuilder.cs:line 122
+2026-01-02T08:24:33                  Error occurred, type: error, text: npm notice
+npm notice New major version of npm available! 10.8.2 -> 11.7.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.7.0
+npm notice To update run: npm install -g npm@11.7.0
+npm notice
+Failed to compile.
+
+app/layout.tsx
+An error occurred in `next/font`.
+
+Error: Cannot find module 'tailwindcss'
+Require stack:
+- /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js
+- /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/config/blocks/css/index.js
+- /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/config/index.js
+- /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack-config.js
+- /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack-build/impl.js
+- /tmp/8de49d7ca3974cf/node_modules/next/dist/compiled/jest-worker/processChild.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1207:15)
+    at /tmp/8de49d7ca3974cf/node_modules/next/dist/server/require-hook.js:55:36
+    at Function.resolve (node:internal/modules/helpers:193:19)
+    at loadPlugin (/tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js:49:32)
+    at /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js:157:56
+    at Array.map (<anonymous>)
+    at getPostCssPlugins (/tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js:157:47)
+    at async /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/config/blocks/css/index.js:124:36
+    at async /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/loaders/next-font-loader/index.js:86:33
+    at async Span.traceAsyncFn (/tmp/8de49d7ca3974cf/node_modules/next/dist/trace/trace.js:154:20)
+
+./app/add-bottle/page.tsx
+Module not found: Can't resolve '@/components/ui/icons'
+
+https://nextjs.org/docs/messages/module-not-found
+
+./app/history/page.tsx
+Module not found: Can't resolve '@/components/ui/icons'
+
+https://nextjs.org/docs/messages/module-not-found
+
+./app/settings/page.tsx
+Module not found: Can't resolve '@/components/ui/icons'
+
+https://nextjs.org/docs/messages/module-not-found
+
+./app/settings/page.tsx
+Module not found: Can't resolve '@/providers/theme-provider'
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+> Build failed because of webpack errors
+/bin/bash -c "oryx build /tmp/zipdeploy/extracted -o /home/site/wwwroot --platform nodejs --platform-version 20 -p virtualenv_name= --log-file /tmp/build-debug.log  -i /tmp/8de49d7ca3974cf -p compress_node_modules=tar-gz | tee /tmp/oryx-build.log ; exit $PIPESTATUS ", stackTrace:    at Kudu.Core.Infrastructure.Executable.ExecuteInternal(ITracer tracer, Func`2 onWriteOutput, Func`2 onWriteError, CancellationToken token, Encoding encoding, String arguments, Object[] args) in /tmp/KuduLite/Kudu.Core/Infrastructure/Executable.cs:line 239
+   at Kudu.Core.Infrastructure.Executable.ExecuteWithProgressWriter(ILogger logger, ITracer tracer, CancellationToken token, String arguments, Object[] args) in /tmp/KuduLite/Kudu.Core/Infrastructure/Executable.cs:line 118
+   at Kudu.Core.Deployment.Generator.ExternalCommandBuilder.RunCommand(DeploymentContext context, String command, Boolean ignoreManifest, CancellationToken token, String message) in /tmp/KuduLite/Kudu.Core/Deployment/Generator/ExternalCommandBuilder.cs:line 122
+   at Kudu.Core.Deployment.Generator.OryxBuilder.RunBuildCommand(IOryxArguments args, DeploymentContext context, CancellationToken token) in /tmp/KuduLite/Kudu.Core/Deployment/Generator/OryxBuilder.cs:line 295
+   at Kudu.Core.Deployment.Generator.OryxBuilder.Build(DeploymentContext context, CancellationToken token) in /tmp/KuduLite/Kudu.Core/Deployment/Generator/OryxBuilder.cs:line 136
+   at Kudu.Core.Deployment.DeploymentManager.Build(ChangeSet changeSet, ITracer tracer, IDisposable deployStep, IRepository repository, DeploymentInfoBase deploymentInfo, DeploymentAnalytics deploymentAnalytics, Boolean fullBuildByDefault, CancellationToken cancellationToken) in /tmp/KuduLite/Kudu.Core/Deployment/DeploymentManager.cs:line 771
+2026-01-02T08:24:36              Error occurred, type: error, text: npm notice
+npm notice New major version of npm available! 10.8.2 -> 11.7.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.7.0
+npm notice To update run: npm install -g npm@11.7.0
+npm notice
+Failed to compile.
+
+app/layout.tsx
+An error occurred in `next/font`.
+
+Error: Cannot find module 'tailwindcss'
+Require stack:
+- /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js
+- /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/config/blocks/css/index.js
+- /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/config/index.js
+- /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack-config.js
+- /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack-build/impl.js
+- /tmp/8de49d7ca3974cf/node_modules/next/dist/compiled/jest-worker/processChild.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1207:15)
+    at /tmp/8de49d7ca3974cf/node_modules/next/dist/server/require-hook.js:55:36
+    at Function.resolve (node:internal/modules/helpers:193:19)
+    at loadPlugin (/tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js:49:32)
+    at /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js:157:56
+    at Array.map (<anonymous>)
+    at getPostCssPlugins (/tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js:157:47)
+    at async /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/config/blocks/css/index.js:124:36
+    at async /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/loaders/next-font-loader/index.js:86:33
+    at async Span.traceAsyncFn (/tmp/8de49d7ca3974cf/node_modules/next/dist/trace/trace.js:154:20)
+
+./app/add-bottle/page.tsx
+Module not found: Can't resolve '@/components/ui/icons'
+
+https://nextjs.org/docs/messages/module-not-found
+
+./app/history/page.tsx
+Module not found: Can't resolve '@/components/ui/icons'
+
+https://nextjs.org/docs/messages/module-not-found
+
+./app/settings/page.tsx
+Module not found: Can't resolve '@/components/ui/icons'
+
+https://nextjs.org/docs/messages/module-not-found
+
+./app/settings/page.tsx
+Module not found: Can't resolve '@/providers/theme-provider'
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+> Build failed because of webpack errors
+/bin/bash -c "oryx build /tmp/zipdeploy/extracted -o /home/site/wwwroot --platform nodejs --platform-version 20 -p virtualenv_name= --log-file /tmp/build-debug.log  -i /tmp/8de49d7ca3974cf -p compress_node_modules=tar-gz | tee /tmp/oryx-build.log ; exit $PIPESTATUS ", stackTrace:    at Kudu.Core.Infrastructure.Executable.ExecuteInternal(ITracer tracer, Func`2 onWriteOutput, Func`2 onWriteError, CancellationToken token, Encoding encoding, String arguments, Object[] args) in /tmp/KuduLite/Kudu.Core/Infrastructure/Executable.cs:line 239
+   at Kudu.Core.Infrastructure.Executable.ExecuteWithProgressWriter(ILogger logger, ITracer tracer, CancellationToken token, String arguments, Object[] args) in /tmp/KuduLite/Kudu.Core/Infrastructure/Executable.cs:line 118
+   at Kudu.Core.Deployment.Generator.ExternalCommandBuilder.RunCommand(DeploymentContext context, String command, Boolean ignoreManifest, CancellationToken token, String message) in /tmp/KuduLite/Kudu.Core/Deployment/Generator/ExternalCommandBuilder.cs:line 122
+   at Kudu.Core.Deployment.Generator.OryxBuilder.RunBuildCommand(IOryxArguments args, DeploymentContext context, CancellationToken token) in /tmp/KuduLite/Kudu.Core/Deployment/Generator/OryxBuilder.cs:line 295
+   at Kudu.Core.Deployment.Generator.OryxBuilder.Build(DeploymentContext context, CancellationToken token) in /tmp/KuduLite/Kudu.Core/Deployment/Generator/OryxBuilder.cs:line 136
+   at Kudu.Core.Deployment.DeploymentManager.Build(ChangeSet changeSet, ITracer tracer, IDisposable deployStep, IRepository repository, DeploymentInfoBase deploymentInfo, DeploymentAnalytics deploymentAnalytics, Boolean fullBuildByDefault, CancellationToken cancellationToken) in /tmp/KuduLite/Kudu.Core/Deployment/DeploymentManager.cs:line 771
+   at Kudu.Core.Deployment.DeploymentManager.Build(ChangeSet changeSet, ITracer tracer, IDisposable deployStep, IRepository repository, DeploymentInfoBase deploymentInfo, DeploymentAnalytics deploymentAnalytics, Boolean fullBuildByDefault, CancellationToken cancellationToken) in /tmp/KuduLite/Kudu.Core/Deployment/DeploymentManager.cs:line 840
+2026-01-02T08:24:41              Error occurred, type: error, text: npm notice
+npm notice New major version of npm available! 10.8.2 -> 11.7.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.7.0
+npm notice To update run: npm install -g npm@11.7.0
+npm notice
+Failed to compile.
+
+app/layout.tsx
+An error occurred in `next/font`.
+
+Error: Cannot find module 'tailwindcss'
+Require stack:
+- /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js
+- /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/config/blocks/css/index.js
+- /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/config/index.js
+- /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack-config.js
+- /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack-build/impl.js
+- /tmp/8de49d7ca3974cf/node_modules/next/dist/compiled/jest-worker/processChild.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1207:15)
+    at /tmp/8de49d7ca3974cf/node_modules/next/dist/server/require-hook.js:55:36
+    at Function.resolve (node:internal/modules/helpers:193:19)
+    at loadPlugin (/tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js:49:32)
+    at /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js:157:56
+    at Array.map (<anonymous>)
+    at getPostCssPlugins (/tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js:157:47)
+    at async /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/config/blocks/css/index.js:124:36
+    at async /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/loaders/next-font-loader/index.js:86:33
+    at async Span.traceAsyncFn (/tmp/8de49d7ca3974cf/node_modules/next/dist/trace/trace.js:154:20)
+
+./app/add-bottle/page.tsx
+Module not found: Can't resolve '@/components/ui/icons'
+
+https://nextjs.org/docs/messages/module-not-found
+
+./app/history/page.tsx
+Module not found: Can't resolve '@/components/ui/icons'
+
+https://nextjs.org/docs/messages/module-not-found
+
+./app/settings/page.tsx
+Module not found: Can't resolve '@/components/ui/icons'
+
+https://nextjs.org/docs/messages/module-not-found
+
+./app/settings/page.tsx
+Module not found: Can't resolve '@/providers/theme-provider'
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+> Build failed because of webpack errors
+/bin/bash -c "oryx build /tmp/zipdeploy/extracted -o /home/site/wwwroot --platform nodejs --platform-version 20 -p virtualenv_name= --log-file /tmp/build-debug.log  -i /tmp/8de49d7ca3974cf -p compress_node_modules=tar-gz | tee /tmp/oryx-build.log ; exit $PIPESTATUS ", stackTrace:    at Kudu.Core.Infrastructure.Executable.ExecuteInternal(ITracer tracer, Func`2 onWriteOutput, Func`2 onWriteError, CancellationToken token, Encoding encoding, String arguments, Object[] args) in /tmp/KuduLite/Kudu.Core/Infrastructure/Executable.cs:line 239
+   at Kudu.Core.Infrastructure.Executable.ExecuteWithProgressWriter(ILogger logger, ITracer tracer, CancellationToken token, String arguments, Object[] args) in /tmp/KuduLite/Kudu.Core/Infrastructure/Executable.cs:line 118
+   at Kudu.Core.Deployment.Generator.ExternalCommandBuilder.RunCommand(DeploymentContext context, String command, Boolean ignoreManifest, CancellationToken token, String message) in /tmp/KuduLite/Kudu.Core/Deployment/Generator/ExternalCommandBuilder.cs:line 122
+   at Kudu.Core.Deployment.Generator.OryxBuilder.RunBuildCommand(IOryxArguments args, DeploymentContext context, CancellationToken token) in /tmp/KuduLite/Kudu.Core/Deployment/Generator/OryxBuilder.cs:line 295
+   at Kudu.Core.Deployment.Generator.OryxBuilder.Build(DeploymentContext context, CancellationToken token) in /tmp/KuduLite/Kudu.Core/Deployment/Generator/OryxBuilder.cs:line 136
+   at Kudu.Core.Deployment.DeploymentManager.Build(ChangeSet changeSet, ITracer tracer, IDisposable deployStep, IRepository repository, DeploymentInfoBase deploymentInfo, DeploymentAnalytics deploymentAnalytics, Boolean fullBuildByDefault, CancellationToken cancellationToken) in /tmp/KuduLite/Kudu.Core/Deployment/DeploymentManager.cs:line 771
+   at Kudu.Core.Deployment.DeploymentManager.Build(ChangeSet changeSet, ITracer tracer, IDisposable deployStep, IRepository repository, DeploymentInfoBase deploymentInfo, DeploymentAnalytics deploymentAnalytics, Boolean fullBuildByDefault, CancellationToken cancellationToken) in /tmp/KuduLite/Kudu.Core/Deployment/DeploymentManager.cs:line 840
+   at Kudu.Core.Deployment.DeploymentManager.DeployAsync(IRepository repository, ChangeSet changeSet, String deployer, Boolean clean, DeploymentInfoBase deploymentInfo, Boolean needFileUpdate, Boolean fullBuildByDefault) in /tmp/KuduLite/Kudu.Core/Deployment/DeploymentManager.cs:line 266
+2026-01-02T08:24:41            Error occurred, type: error, text: npm notice
+npm notice New major version of npm available! 10.8.2 -> 11.7.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.7.0
+npm notice To update run: npm install -g npm@11.7.0
+npm notice
+Failed to compile.
+
+app/layout.tsx
+An error occurred in `next/font`.
+
+Error: Cannot find module 'tailwindcss'
+Require stack:
+- /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js
+- /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/config/blocks/css/index.js
+- /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/config/index.js
+- /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack-config.js
+- /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack-build/impl.js
+- /tmp/8de49d7ca3974cf/node_modules/next/dist/compiled/jest-worker/processChild.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1207:15)
+    at /tmp/8de49d7ca3974cf/node_modules/next/dist/server/require-hook.js:55:36
+    at Function.resolve (node:internal/modules/helpers:193:19)
+    at loadPlugin (/tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js:49:32)
+    at /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js:157:56
+    at Array.map (<anonymous>)
+    at getPostCssPlugins (/tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js:157:47)
+    at async /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/config/blocks/css/index.js:124:36
+    at async /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/loaders/next-font-loader/index.js:86:33
+    at async Span.traceAsyncFn (/tmp/8de49d7ca3974cf/node_modules/next/dist/trace/trace.js:154:20)
+
+./app/add-bottle/page.tsx
+Module not found: Can't resolve '@/components/ui/icons'
+
+https://nextjs.org/docs/messages/module-not-found
+
+./app/history/page.tsx
+Module not found: Can't resolve '@/components/ui/icons'
+
+https://nextjs.org/docs/messages/module-not-found
+
+./app/settings/page.tsx
+Module not found: Can't resolve '@/components/ui/icons'
+
+https://nextjs.org/docs/messages/module-not-found
+
+./app/settings/page.tsx
+Module not found: Can't resolve '@/providers/theme-provider'
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+> Build failed because of webpack errors
+/bin/bash -c "oryx build /tmp/zipdeploy/extracted -o /home/site/wwwroot --platform nodejs --platform-version 20 -p virtualenv_name= --log-file /tmp/build-debug.log  -i /tmp/8de49d7ca3974cf -p compress_node_modules=tar-gz | tee /tmp/oryx-build.log ; exit $PIPESTATUS ", stackTrace:    at Kudu.Core.Infrastructure.Executable.ExecuteInternal(ITracer tracer, Func`2 onWriteOutput, Func`2 onWriteError, CancellationToken token, Encoding encoding, String arguments, Object[] args) in /tmp/KuduLite/Kudu.Core/Infrastructure/Executable.cs:line 239
+   at Kudu.Core.Infrastructure.Executable.ExecuteWithProgressWriter(ILogger logger, ITracer tracer, CancellationToken token, String arguments, Object[] args) in /tmp/KuduLite/Kudu.Core/Infrastructure/Executable.cs:line 118
+   at Kudu.Core.Deployment.Generator.ExternalCommandBuilder.RunCommand(DeploymentContext context, String command, Boolean ignoreManifest, CancellationToken token, String message) in /tmp/KuduLite/Kudu.Core/Deployment/Generator/ExternalCommandBuilder.cs:line 122
+   at Kudu.Core.Deployment.Generator.OryxBuilder.RunBuildCommand(IOryxArguments args, DeploymentContext context, CancellationToken token) in /tmp/KuduLite/Kudu.Core/Deployment/Generator/OryxBuilder.cs:line 295
+   at Kudu.Core.Deployment.Generator.OryxBuilder.Build(DeploymentContext context, CancellationToken token) in /tmp/KuduLite/Kudu.Core/Deployment/Generator/OryxBuilder.cs:line 136
+   at Kudu.Core.Deployment.DeploymentManager.Build(ChangeSet changeSet, ITracer tracer, IDisposable deployStep, IRepository repository, DeploymentInfoBase deploymentInfo, DeploymentAnalytics deploymentAnalytics, Boolean fullBuildByDefault, CancellationToken cancellationToken) in /tmp/KuduLite/Kudu.Core/Deployment/DeploymentManager.cs:line 771
+   at Kudu.Core.Deployment.DeploymentManager.Build(ChangeSet changeSet, ITracer tracer, IDisposable deployStep, IRepository repository, DeploymentInfoBase deploymentInfo, DeploymentAnalytics deploymentAnalytics, Boolean fullBuildByDefault, CancellationToken cancellationToken) in /tmp/KuduLite/Kudu.Core/Deployment/DeploymentManager.cs:line 840
+   at Kudu.Core.Deployment.DeploymentManager.DeployAsync(IRepository repository, ChangeSet changeSet, String deployer, Boolean clean, DeploymentInfoBase deploymentInfo, Boolean needFileUpdate, Boolean fullBuildByDefault) in /tmp/KuduLite/Kudu.Core/Deployment/DeploymentManager.cs:line 266
+2026-01-02T08:24:42        Error occurred, type: error, text: Deployment failed, stackTrace:    at Kudu.Core.Deployment.DeploymentManager.DeployAsync(IRepository repository, ChangeSet changeSet, String deployer, Boolean clean, DeploymentInfoBase deploymentInfo, Boolean needFileUpdate, Boolean fullBuildByDefault) in /tmp/KuduLite/Kudu.Core/Deployment/DeploymentManager.cs:line 307
+   at Kudu.Core.Deployment.FetchDeploymentManager.PerformDeployment(DeploymentInfoBase deploymentInfo, IDisposable tempDeployment, ChangeSet tempChangeSet, DeployStatusApiResult updateStatusObj) in /tmp/KuduLite/Kudu.Core/Deployment/FetchDeploymentManager.cs:line 230
+   at Kudu.Core.Deployment.FetchDeploymentManager.<>c__DisplayClass17_0.<<FetchDeploy>b__0>d.MoveNext() in /tmp/KuduLite/Kudu.Core/Deployment/FetchDeploymentManager.cs:line 131
+--- End of stack trace from previous location ---
+   at Kudu.Core.Deployment.FetchDeploymentManager.FetchDeploy(DeploymentInfoBase deployInfo, Boolean asyncRequested, Uri requestUri, String targetBranch) in /tmp/KuduLite/Kudu.Core/Deployment/FetchDeploymentManager.cs:line 124
+   at Kudu.Services.Deployment.PushDeploymentController.PushDeployAsync(ArtifactDeploymentInfo deploymentInfo, Boolean isAsync, HttpContext context, JObject requestJson) in /tmp/KuduLite/Kudu.Services/Deployment/PushDeploymentController.cs:line 802
+   at Kudu.Services.Deployment.PushDeploymentController.OneDeploy(String type, Boolean async, String path, Nullable`1 restart, Nullable`1 clean, Boolean ignoreStack, Boolean trackDeploymentProgress, Boolean trackStatus, Boolean reset) in /tmp/KuduLite/Kudu.Services/Deployment/PushDeploymentController.cs:line 624
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Kudu.Services.Web.Tracing.TraceMiddleware.Invoke(HttpContext context) in /tmp/KuduLite/Kudu.Services.Web/Tracing/TraceMiddleware.cs:line 101, innerText: npm notice
+npm notice New major version of npm available! 10.8.2 -> 11.7.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.7.0
+npm notice To update run: npm install -g npm@11.7.0
+npm notice
+Failed to compile.
+
+app/layout.tsx
+An error occurred in `next/font`.
+
+Error: Cannot find module 'tailwindcss'
+Require stack:
+- /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js
+- /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/config/blocks/css/index.js
+- /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/config/index.js
+- /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack-config.js
+- /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack-build/impl.js
+- /tmp/8de49d7ca3974cf/node_modules/next/dist/compiled/jest-worker/processChild.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1207:15)
+    at /tmp/8de49d7ca3974cf/node_modules/next/dist/server/require-hook.js:55:36
+    at Function.resolve (node:internal/modules/helpers:193:19)
+    at loadPlugin (/tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js:49:32)
+    at /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js:157:56
+    at Array.map (<anonymous>)
+    at getPostCssPlugins (/tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js:157:47)
+    at async /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/config/blocks/css/index.js:124:36
+    at async /tmp/8de49d7ca3974cf/node_modules/next/dist/build/webpack/loaders/next-font-loader/index.js:86:33
+    at async Span.traceAsyncFn (/tmp/8de49d7ca3974cf/node_modules/next/dist/trace/trace.js:154:20)
+
+./app/add-bottle/page.tsx
+Module not found: Can't resolve '@/components/ui/icons'
+
+https://nextjs.org/docs/messages/module-not-found
+
+./app/history/page.tsx
+Module not found: Can't resolve '@/components/ui/icons'
+
+https://nextjs.org/docs/messages/module-not-found
+
+./app/settings/page.tsx
+Module not found: Can't resolve '@/components/ui/icons'
+
+https://nextjs.org/docs/messages/module-not-found
+
+./app/settings/page.tsx
+Module not found: Can't resolve '@/providers/theme-provider'
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+> Build failed because of webpack errors
+/bin/bash -c "oryx build /tmp/zipdeploy/extracted -o /home/site/wwwroot --platform nodejs --platform-version 20 -p virtualenv_name= --log-file /tmp/build-debug.log  -i /tmp/8de49d7ca3974cf -p compress_node_modules=tar-gz | tee /tmp/oryx-build.log ; exit $PIPESTATUS ", innerStackTrace:    at Kudu.Core.Infrastructure.Executable.ExecuteInternal(ITracer tracer, Func`2 onWriteOutput, Func`2 onWriteError, CancellationToken token, Encoding encoding, String arguments, Object[] args) in /tmp/KuduLite/Kudu.Core/Infrastructure/Executable.cs:line 239
+   at Kudu.Core.Infrastructure.Executable.ExecuteWithProgressWriter(ILogger logger, ITracer tracer, CancellationToken token, String arguments, Object[] args) in /tmp/KuduLite/Kudu.Core/Infrastructure/Executable.cs:line 118
+   at Kudu.Core.Deployment.Generator.ExternalCommandBuilder.RunCommand(DeploymentContext context, String command, Boolean ignoreManifest, CancellationToken token, String message) in /tmp/KuduLite/Kudu.Core/Deployment/Generator/ExternalCommandBuilder.cs:line 122
+   at Kudu.Core.Deployment.Generator.OryxBuilder.RunBuildCommand(IOryxArguments args, DeploymentContext context, CancellationToken token) in /tmp/KuduLite/Kudu.Core/Deployment/Generator/OryxBuilder.cs:line 295
+   at Kudu.Core.Deployment.Generator.OryxBuilder.Build(DeploymentContext context, CancellationToken token) in /tmp/KuduLite/Kudu.Core/Deployment/Generator/OryxBuilder.cs:line 136
+   at Kudu.Core.Deployment.DeploymentManager.Build(ChangeSet changeSet, ITracer tracer, IDisposable deployStep, IRepository repository, DeploymentInfoBase deploymentInfo, DeploymentAnalytics deploymentAnalytics, Boolean fullBuildByDefault, CancellationToken cancellationToken) in /tmp/KuduLite/Kudu.Core/Deployment/DeploymentManager.cs:line 771
+   at Kudu.Core.Deployment.DeploymentManager.Build(ChangeSet changeSet, ITracer tracer, IDisposable deployStep, IRepository repository, DeploymentInfoBase deploymentInfo, DeploymentAnalytics deploymentAnalytics, Boolean fullBuildByDefault, CancellationToken cancellationToken) in /tmp/KuduLite/Kudu.Core/Deployment/DeploymentManager.cs:line 840
+   at Kudu.Core.Deployment.DeploymentManager.DeployAsync(IRepository repository, ChangeSet changeSet, String deployer, Boolean clean, DeploymentInfoBase deploymentInfo, Boolean needFileUpdate, Boolean fullBuildByDefault) in /tmp/KuduLite/Kudu.Core/Deployment/DeploymentManager.cs:line 266
+2026-01-02T08:24:42          Outgoing response, type: response, statusCode: 400, statusText: BadRequest
