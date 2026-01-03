@@ -138,9 +138,30 @@ az webapp deploy --resource-group PiprApp --name pipr-app --src-path deploy.zip 
 2. Right-click on your Web App in the Azure panel
 3. Select **Deploy to Web App**
 
-#### Option C: Using GitHub Actions (Continuous Deployment)
+#### Option C: Using GitHub Actions (Continuous Deployment) - Recommended for Production
 
-Set up GitHub Actions for automatic deployment on push. See [Azure App Service documentation](https://docs.microsoft.com/en-us/azure/app-service/deploy-github-actions).
+**Automated CI/CD with GitHub Actions is the recommended approach for production deployments.**
+
+The repository includes pre-configured GitHub Actions workflows for continuous integration and deployment:
+
+- **CI Workflow** (`ci.yml`): Validates code quality, runs linting, and builds the application on every push/PR
+- **CD Workflow** (`deploy-azure.yml`): Automatically deploys to Azure on push to `main` branch
+
+**Quick Setup**:
+
+1. Configure required secrets and variables in your GitHub repository (**Settings → Secrets and variables → Actions**)
+2. Run the workflow manually the first time to deploy infrastructure
+3. Push to `main` branch triggers automatic deployment
+
+**For detailed instructions, see [GitHub Actions Setup Guide](.github/GITHUB_ACTIONS_SETUP.md)**
+
+**Benefits**:
+- Automated builds and deployments on every commit to `main`
+- Built-in code quality checks with ESLint
+- Database migrations run automatically
+- Deployment history and rollback capabilities
+- Environment-based deployments (production/staging)
+- Secure authentication using OIDC (no long-lived credentials)
 
 ### 6. Run Database Migrations
 
