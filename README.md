@@ -38,17 +38,20 @@ Tables: users, family_spaces, family_memberships, invites, babies, feed_events w
 ## Azure deployment (managed-first)
 Resources: App Service Plan (Linux), Web App, Postgres Flexible Server + DB, Key Vault, Managed Identity, Application Insights, Easy Auth (External ID).
 
-Deploy with PowerShell:
+**For complete deployment instructions, see [DEPLOYMENT.md](./DEPLOYMENT.md)**
+
+Quick deployment with PowerShell:
 ```powershell
-# Requires az CLI and logged in to subscription 83d3232d-0cc9-45e3-bbf1-0fe9b89e30d8
+# Requires az CLI and logged in to subscription
 cd infra
-./deploy.ps1 -AppName pipr-app -AuthClientId <client-id> -AuthClientSecret <secret> -AuthIssuerUri "https://login.microsoftonline.com/<tenant-id>/v2.0"
+./deploy.ps1 -AppName pipr-app -AuthClientId <client-id> -AuthClientSecret <secret>
 ```
 The script:
 - Creates RG `PiprApp` (default) in `eastus`.
 - Deploys infra via `main.bicep`.
 - Stores DB URL and invite secret in Key Vault.
 - Enables Easy Auth with the provided External ID app registration.
+- Configures build settings to install all dependencies (including devDependencies).
 
 ## Auth header decoding
 The backend reads `X-MS-CLIENT-PRINCIPAL` (Base64 JSON). Claims of interest:
