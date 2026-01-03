@@ -15,7 +15,9 @@ Pipr is a mobile-first newborn feed tracker web application built with Next.js, 
 ### Authentication & Authorization
 - Authentication is handled by Azure App Service Easy Auth (External ID with Email OTP)
 - The backend reads the `X-MS-CLIENT-PRINCIPAL` header (Base64 encoded JSON) to identify users
-- User claims of interest: `sub`/`nameidentifier` for stable ID, `email`/`emails` for invite matching
+- User claims of interest:
+  - `sub` or `nameidentifier` for stable user ID (prefer `sub` if available)
+  - `email` or `emails` for invite matching (case-insensitive)
 - For local development only, `DEV_AUTH_BYPASS=true` can inject a fake user (NEVER enable in production)
 - All API endpoints should enforce per-family authorization based on family_memberships
 
@@ -71,7 +73,8 @@ npm run dev
 ### React/Next.js
 - Use functional components with hooks
 - Follow Next.js 14 App Router conventions
-- Place client components in `/src/components`
+- Project uses both `/app` (pages, API routes) and `/src` (shared components, lib, providers) directories
+- Place reusable components in `/src/components`
 - Place API routes in `/app/api`
 - Use Server Components by default, add 'use client' only when necessary
 
@@ -85,7 +88,7 @@ npm run dev
 - Use environment variables and Azure Key Vault for sensitive data
 - Always validate and sanitize user inputs
 - Enforce authorization checks on all API endpoints
-- Use Zod for input validation
+- Use Zod for input validation (see examples in `/app/api` routes)
 
 ### Code Organization
 - Keep components small and focused
