@@ -40,6 +40,18 @@ Resources: App Service Plan (Linux), Web App, Postgres Flexible Server + DB, Key
 
 **For complete deployment instructions, see [DEPLOYMENT.md](./DEPLOYMENT.md)**
 
+### Deployment Options
+
+#### Option 1: GitHub Actions (Recommended for Production)
+Automated CI/CD with GitHub Actions provides continuous deployment on every push to `main`:
+- Automated builds, linting, and testing
+- Infrastructure deployment using Bicep
+- Automatic database migrations
+- Secure OIDC authentication with Azure
+
+See [GitHub Actions Setup Guide](.github/GITHUB_ACTIONS_SETUP.md) for configuration details.
+
+#### Option 2: PowerShell Script (Quick Manual Deployment)
 Quick deployment with PowerShell:
 ```powershell
 # Requires az CLI and logged in to subscription
