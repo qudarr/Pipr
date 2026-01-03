@@ -130,6 +130,8 @@ resource webApp 'Microsoft.Web/sites@2023-12-01' = {
           value: 'true'
         }
         {
+          // Required for Next.js build: installs devDependencies (TypeScript, Tailwind, etc.)
+          // Note: For enhanced security, consider using a CI/CD pipeline to build and deploy artifacts
           name: 'NPM_CONFIG_PRODUCTION'
           value: 'false'
         }

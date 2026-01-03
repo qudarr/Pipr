@@ -233,6 +233,10 @@ az group delete --name PiprApp --yes --no-wait
 - Store the Database URL and Invite Token Secret output from the deployment script securely
 - The Auth Client Secret is stored in Azure Key Vault and accessed via the Web App's managed identity
 - Rotate the Auth Client Secret periodically in the Entra Admin Center and update the Key Vault secret
+- **DevDependencies in Production**: The current configuration installs devDependencies during build (`NPM_CONFIG_PRODUCTION=false`). This is required for Next.js to build on Azure App Service but increases the deployed package size. For enhanced security:
+  - Regularly audit devDependencies for vulnerabilities using `npm audit`
+  - Consider using a CI/CD pipeline (GitHub Actions, Azure DevOps) to build the application separately and deploy only the production build artifacts
+  - Monitor Application Insights for any unusual activity
 
 ## Additional Resources
 
