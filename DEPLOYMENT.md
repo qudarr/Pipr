@@ -122,16 +122,15 @@ The infrastructure is now ready. To deploy your application code:
 #### Option A: Using Azure CLI (Recommended)
 
 ```bash
-# Build and create a deployment package
-npm install
-npm run build
-
-# Create a zip file of the required files
-zip -r deploy.zip .next node_modules package.json package-lock.json public prisma next.config.js
+# From the repository root, create a deployment package
+# Note: Azure will run npm install and build, so we only need source files
+zip -r deploy.zip .next package.json package-lock.json public prisma next.config.js app src infra
 
 # Deploy to Azure
 az webapp deploy --resource-group PiprApp --name pipr-app --src-path deploy.zip --type zip
 ```
+
+**Note**: Do not include `node_modules` in the deployment zip. Azure App Service will run `npm install` automatically during deployment.
 
 #### Option B: Using VS Code
 
@@ -233,9 +232,9 @@ az group delete --name PiprApp --yes --no-wait
 - Store the Database URL and Invite Token Secret output from the deployment script securely
 - The Auth Client Secret is stored in Azure Key Vault and accessed via the Web App's managed identity
 - Rotate the Auth Client Secret periodically in the Entra Admin Center and update the Key Vault secret
-- **DevDependencies in Production**: The current configuration installs devDependencies during build (`NPM_CONFIG_PRODUCTION=false`). This is required for Next.js to build on Azure App Service but increases the deployed package size. For enhanced security:
-  - Regularly audit devDependencies for vulnerabilities using `npm audit`
-  - Consider using a CI/CD pipeline (GitHub Actions, Azure DevOps) to build the application separately and deploy only the production build artifacts
+- **DevDependencies in Build**: The current configuration installs devDependencies during the build phase (`NPM_CONFIG_PRODUCTION=false`). This is required for Next.js to build on Azure App Service. While devDependencies are only used during build and not in runtime, consider these security practices:
+  - Regularly audit all dependencies (including devDependencies) for vulnerabilities using `npm audit`
+  - Consider using a CI/CD pipeline (GitHub Actions, Azure DevOps) to build the application in a separate environment and deploy only the production build artifacts
   - Monitor Application Insights for any unusual activity
 
 ## Additional Resources
