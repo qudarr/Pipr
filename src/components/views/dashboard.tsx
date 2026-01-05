@@ -1,8 +1,16 @@
-"use client";
+'use client';
 
 import React, { useEffect, useState } from 'react';
 import { format } from 'date-fns';
-import { BabyIcon, BottleIcon, CalendarIcon, HistoryIcon, MoonIcon, SettingsIcon, SunIcon } from '../ui/icons';
+import {
+  BabyIcon,
+  BottleIcon,
+  CalendarIcon,
+  HistoryIcon,
+  MoonIcon,
+  SettingsIcon,
+  SunIcon
+} from '../ui/icons';
 import { useTheme } from '@/providers/theme-provider';
 import WelcomeWizard from '../welcome-wizard';
 
@@ -79,7 +87,9 @@ export default function Dashboard() {
               <BabyIcon className="w-6 h-6" />
             </div>
             <div>
-              <p className="text-xs uppercase tracking-wide text-slate-400">Today</p>
+              <p className="text-xs uppercase tracking-wide text-slate-400">
+                Today
+              </p>
               <p className="font-semibold text-lg">{todayLabel}</p>
             </div>
           </div>
@@ -89,9 +99,16 @@ export default function Dashboard() {
               className="p-2 rounded-full bg-slate-800 text-slate-100 hover:bg-slate-700"
               aria-label="Toggle theme"
             >
-              {resolved === 'dark' ? <SunIcon className="w-5 h-5" /> : <MoonIcon className="w-5 h-5" />}
+              {resolved === 'dark' ? (
+                <SunIcon className="w-5 h-5" />
+              ) : (
+                <MoonIcon className="w-5 h-5" />
+              )}
             </button>
-            <button className="p-2 rounded-full bg-slate-800 text-slate-100 hover:bg-slate-700" aria-label="Settings">
+            <button
+              className="p-2 rounded-full bg-slate-800 text-slate-100 hover:bg-slate-700"
+              aria-label="Settings"
+            >
               <SettingsIcon className="w-5 h-5" />
             </button>
           </div>
@@ -108,12 +125,18 @@ export default function Dashboard() {
             </div>
           </div>
           <div className="text-4xl font-bold tracking-tight">00:00:00</div>
-          <p className="text-xs mt-2 text-slate-800/90">Auto-switch at 20 min</p>
-          <p className="text-xs text-slate-800/90">Auto-stop second side at 20 min</p>
+          <p className="text-xs mt-2 text-slate-800/90">
+            Auto-switch at 20 min
+          </p>
+          <p className="text-xs text-slate-800/90">
+            Auto-stop second side at 20 min
+          </p>
         </section>
 
         <section className="mt-5">
-          <h3 className="text-sm font-semibold text-slate-300 mb-3">Quick Add</h3>
+          <h3 className="text-sm font-semibold text-slate-300 mb-3">
+            Quick Add
+          </h3>
           <div className="grid grid-cols-2 gap-3">
             {[
               { label: 'Bottle', icon: <BottleIcon className="w-5 h-5" /> },
@@ -125,7 +148,9 @@ export default function Dashboard() {
                 key={item.label}
                 className="card w-full p-4 flex items-center gap-3 text-left bg-slate-800/70 text-slate-50"
               >
-                <span className="p-2 rounded-xl bg-slate-900/50 text-accent">{item.icon}</span>
+                <span className="p-2 rounded-xl bg-slate-900/50 text-accent">
+                  {item.icon}
+                </span>
                 <span className="font-medium">{item.label}</span>
               </button>
             ))}
@@ -157,20 +182,44 @@ export default function Dashboard() {
           </div>
           <div className="card p-8 bg-slate-800/70 text-slate-50 text-center">
             <p className="text-slate-400">No events yet</p>
-            <p className="text-xs text-slate-500 mt-1">Start tracking your baby&apos;s feeds</p>
+            <p className="text-xs text-slate-500 mt-1">
+              Start tracking your baby&apos;s feeds
+            </p>
           </div>
         </section>
 
         <nav className="fixed bottom-0 left-0 right-0 bg-slate-900/80 backdrop-blur border-t border-slate-800">
           <div className="max-w-md mx-auto flex justify-around py-3 text-slate-300">
             {[
-              { label: 'Today', href: '/', icon: <CalendarIcon className="w-5 h-5" /> },
-              { label: 'History', href: '/history', icon: <HistoryIcon className="w-5 h-5" /> },
-              { label: 'Add', href: '/add-bottle', icon: <BottleIcon className="w-5 h-5" /> },
-              { label: 'Settings', href: '/settings', icon: <SettingsIcon className="w-5 h-5" /> }
+              {
+                label: 'Today',
+                href: '/',
+                icon: <CalendarIcon className="w-5 h-5" />
+              },
+              {
+                label: 'History',
+                href: '/history',
+                icon: <HistoryIcon className="w-5 h-5" />
+              },
+              {
+                label: 'Add',
+                href: '/add-bottle',
+                icon: <BottleIcon className="w-5 h-5" />
+              },
+              {
+                label: 'Settings',
+                href: '/settings',
+                icon: <SettingsIcon className="w-5 h-5" />
+              }
             ].map((item) => (
-              <a key={item.label} href={item.href} className="flex flex-col items-center gap-1 text-sm">
-                <span className="p-2 rounded-xl bg-slate-800/80 text-accent">{item.icon}</span>
+              <a
+                key={item.label}
+                href={item.href}
+                className="flex flex-col items-center gap-1 text-sm"
+              >
+                <span className="p-2 rounded-xl bg-slate-800/80 text-accent">
+                  {item.icon}
+                </span>
                 <span>{item.label}</span>
               </a>
             ))}

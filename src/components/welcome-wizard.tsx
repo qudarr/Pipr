@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, { useState } from 'react';
 import { BabyIcon } from './ui/icons';
@@ -38,12 +38,16 @@ export default function WelcomeWizard({ onComplete }: WelcomeWizardProps) {
             <BabyIcon className="w-12 h-12" />
           </div>
           <h1 className="text-2xl font-bold mb-2">Welcome to Pipr</h1>
-          <p className="text-slate-400 text-sm">Let&apos;s get started tracking your baby&apos;s feeds</p>
+          <p className="text-slate-400 text-sm">
+            Let&apos;s get started tracking your baby&apos;s feeds
+          </p>
         </div>
 
         {step === 1 && (
           <div className="card p-6 bg-slate-800/80 text-slate-50">
-            <label className="block mb-2 text-sm font-semibold">What&apos;s your baby&apos;s name?</label>
+            <label className="block mb-2 text-sm font-semibold">
+              What&apos;s your baby&apos;s name?
+            </label>
             <input
               type="text"
               value={babyName}
@@ -65,8 +69,12 @@ export default function WelcomeWizard({ onComplete }: WelcomeWizardProps) {
 
         {step === 2 && (
           <div className="card p-6 bg-slate-800/80 text-slate-50">
-            <label className="block mb-2 text-sm font-semibold">When was {babyName} born?</label>
-            <p className="text-xs text-slate-400 mb-3">(Optional - helps track milestones)</p>
+            <label className="block mb-2 text-sm font-semibold">
+              When was {babyName} born?
+            </label>
+            <p className="text-xs text-slate-400 mb-3">
+              (Optional - helps track milestones)
+            </p>
             <input
               type="date"
               value={birthdate}
@@ -92,8 +100,12 @@ export default function WelcomeWizard({ onComplete }: WelcomeWizardProps) {
         )}
 
         <div className="flex justify-center gap-2 mt-6">
-          <div className={`w-2 h-2 rounded-full ${step === 1 ? 'bg-accent' : 'bg-slate-700'}`} />
-          <div className={`w-2 h-2 rounded-full ${step === 2 ? 'bg-accent' : 'bg-slate-700'}`} />
+          <div
+            className={`w-2 h-2 rounded-full ${step === 1 ? 'bg-accent' : 'bg-slate-700'}`}
+          />
+          <div
+            className={`w-2 h-2 rounded-full ${step === 2 ? 'bg-accent' : 'bg-slate-700'}`}
+          />
         </div>
       </div>
     </div>
