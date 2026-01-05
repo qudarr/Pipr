@@ -1,5 +1,4 @@
-import { headers } from 'next/headers';
-import crypto from 'crypto';
+import { headers, cookies } from 'next/headers';
 
 export type ClientPrincipal = {
   userId: string;
@@ -17,9 +16,19 @@ export type AuthenticatedUser = {
 };
 
 const DEV_BYPASS_ENV = 'DEV_AUTH_BYPASS';
+const DEV_USER_COOKIE = 'dev-user-id';
+const DEV_USER_HEADER = 'x-dev-user-id';
 
-const getClaim = (principal: ClientPrincipal | null, type: string): string | undefined => {
-  return principal?.claims?.find((c) => c.typ.toLowerCase() === type.toLowerCase())?.val;
+// Default dev user for convenience
+const DEFAULT_DEV_USER = 'dev-user-1';
+
+const getClaim = (
+  principal: ClientPrincipal | null,
+  type: string
+): string | undefined => {
+  return principal?.claims?.find(
+    (c) => c.typ.toLowerCase() === type.toLowerCase()
+  )?.val;
 };
 
 const parsePrincipal = (encoded: string | null): ClientPrincipal | null => {
@@ -39,23 +48,47 @@ export const getClientPrincipal = (): ClientPrincipal | null => {
   return parsePrincipal(principalHeader);
 };
 
+/**
+ * Gets the dev user ID from header or cookie.
+ * Priority: header > cookie > default
+ * Use header (x-dev-user-id) for API testing, cookie for browser sessions.
+ */
+const getDevUserId = (): string => {
+  const hdrs = headers();
+  const headerValue = hdrs.get(DEV_USER_HEADER);
+  if (headerValue) return headerValue;
+
+  const cookieStore = cookies();
+  const cookieValue = cookieStore.get(DEV_USER_COOKIE)?.value;
+  if (cookieValue) return cookieValue;
+
+  return DEFAULT_DEV_USER;
+};
+
 export const getAuthenticatedUser = (): AuthenticatedUser | null => {
   const principal = getClientPrincipal();
   const devBypass = process.env[DEV_BYPASS_ENV] === 'true';
 
   if (devBypass && !principal) {
-    const devSub = 'dev-user-' + crypto.randomUUID();
+    const devUserId = getDevUserId();
     return {
-      externalSubject: devSub,
-      email: 'dev@example.com',
-      displayName: 'Dev User',
+      externalSubject: devUserId,
+      email: `${devUserId}@example.com`,
+      displayName: devUserId
+        .replace(/-/g, ' ')
+        .replace(/\b\w/g, (c) => c.toUpperCase()),
       isDevBypass: true
     };
   }
 
   if (!principal) return null;
 
-  const subject = getClaim(principal, 'sub') || getClaim(principal, 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier');
+  const subject =
+    getClaim(principal, 'sub') ||
+    getClaim(
+      principal,
+      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'
+    );
   const email = getClaim(principal, 'emails') || getClaim(principal, 'email');
   const name = principal.userDetails;
 

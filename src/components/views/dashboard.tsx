@@ -1,26 +1,74 @@
 "use client";
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { format } from 'date-fns';
 import { BabyIcon, BottleIcon, CalendarIcon, HistoryIcon, MoonIcon, SettingsIcon, SunIcon } from '../ui/icons';
 import { useTheme } from '@/providers/theme-provider';
-
-const mockTotals = {
-  feeds: 6,
-  diapers: 4,
-  sleepHours: 10
-};
-
-const mockHistory = [
-  { time: '10:30 AM', type: 'Bottle Feed', detail: '120 mL • Formula' },
-  { time: '8:15 AM', type: 'Breastfeed', detail: 'Left: 18 min, Right: 15 min' },
-  { time: '6:00 AM', type: 'Bottle Feed', detail: '100 mL • Breast Milk' }
-];
+import WelcomeWizard from '../welcome-wizard';
 
 export default function Dashboard() {
+  const [showWizard, setShowWizard] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const todayLabel = format(new Date(), 'EEEE, MMM d');
   const { setTheme, resolved } = useTheme();
   const toggleTheme = () => setTheme(resolved === 'dark' ? 'light' : 'dark');
+
+  useEffect(() => {
+    checkUserStatus();
+  }, []);
+
+  const checkUserStatus = async () => {
+    try {
+      const res = await fetch('/api/me');
+      if (res.ok) {
+        const data = await res.json();
+        setShowWizard(!data.membership);
+      }
+    } catch (err) {
+      console.error('Failed to check user status:', err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleWizardComplete = async (babyName: string, birthdate?: string) => {
+    try {
+      // Create family space
+      const familyRes = await fetch('/api/family', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: `${babyName}'s Family` })
+      });
+
+      if (!familyRes.ok) throw new Error('Failed to create family');
+
+      // Create baby
+      const babyRes = await fetch('/api/babies', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: babyName, birthdate })
+      });
+
+      if (!babyRes.ok) throw new Error('Failed to create baby');
+
+      setShowWizard(false);
+    } catch (err) {
+      console.error('Failed to complete wizard:', err);
+      alert('Failed to set up your account. Please try again.');
+    }
+  };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-950 to-slate-900 flex items-center justify-center">
+        <div className="text-slate-400">Loading...</div>
+      </div>
+    );
+  }
+
+  if (showWizard) {
+    return <WelcomeWizard onComplete={handleWizardComplete} />;
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-950 to-slate-900 text-slate-100 dark:from-slate-950 dark:via-slate-950 dark:to-slate-950">
@@ -59,7 +107,7 @@ export default function Dashboard() {
               <div className="absolute right-1 top-1 w-4 h-4 rounded-full bg-white" />
             </div>
           </div>
-          <div className="text-4xl font-bold tracking-tight">00:12:34</div>
+          <div className="text-4xl font-bold tracking-tight">00:00:00</div>
           <p className="text-xs mt-2 text-slate-800/90">Auto-switch at 20 min</p>
           <p className="text-xs text-slate-800/90">Auto-stop second side at 20 min</p>
         </section>
@@ -88,15 +136,15 @@ export default function Dashboard() {
           <p className="text-sm text-slate-400">Today&apos;s Totals</p>
           <div className="grid grid-cols-3 gap-4 mt-3">
             <div>
-              <p className="text-2xl font-bold">{mockTotals.feeds}</p>
+              <p className="text-2xl font-bold">0</p>
               <p className="text-xs text-slate-400">Feeds</p>
             </div>
             <div>
-              <p className="text-2xl font-bold">{mockTotals.diapers}</p>
+              <p className="text-2xl font-bold">0</p>
               <p className="text-xs text-slate-400">Diapers</p>
             </div>
             <div>
-              <p className="text-2xl font-bold">{mockTotals.sleepHours}h</p>
+              <p className="text-2xl font-bold">0h</p>
               <p className="text-xs text-slate-400">Sleep</p>
             </div>
           </div>
@@ -107,17 +155,9 @@ export default function Dashboard() {
             <h3 className="text-sm font-semibold text-slate-300">History</h3>
             <button className="text-xs text-accent">Filter</button>
           </div>
-          <div className="space-y-3">
-            {mockHistory.map((item, idx) => (
-              <div key={idx} className="card p-4 bg-slate-800/70 text-slate-50 flex items-start gap-3">
-                <BottleIcon className="w-5 h-5 mt-1 text-accent" />
-                <div>
-                  <p className="text-xs text-slate-400">{item.time}</p>
-                  <p className="font-semibold">{item.type}</p>
-                  <p className="text-xs text-slate-400">{item.detail}</p>
-                </div>
-              </div>
-            ))}
+          <div className="card p-8 bg-slate-800/70 text-slate-50 text-center">
+            <p className="text-slate-400">No events yet</p>
+            <p className="text-xs text-slate-500 mt-1">Start tracking your baby&apos;s feeds</p>
           </div>
         </section>
 
