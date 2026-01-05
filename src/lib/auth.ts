@@ -22,8 +22,13 @@ const DEV_USER_HEADER = 'x-dev-user-id';
 // Default dev user for convenience
 const DEFAULT_DEV_USER = 'dev-user-1';
 
-const getClaim = (principal: ClientPrincipal | null, type: string): string | undefined => {
-  return principal?.claims?.find((c) => c.typ.toLowerCase() === type.toLowerCase())?.val;
+const getClaim = (
+  principal: ClientPrincipal | null,
+  type: string
+): string | undefined => {
+  return principal?.claims?.find(
+    (c) => c.typ.toLowerCase() === type.toLowerCase()
+  )?.val;
 };
 
 const parsePrincipal = (encoded: string | null): ClientPrincipal | null => {
@@ -69,14 +74,21 @@ export const getAuthenticatedUser = (): AuthenticatedUser | null => {
     return {
       externalSubject: devUserId,
       email: `${devUserId}@example.com`,
-      displayName: devUserId.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()),
+      displayName: devUserId
+        .replace(/-/g, ' ')
+        .replace(/\b\w/g, (c) => c.toUpperCase()),
       isDevBypass: true
     };
   }
 
   if (!principal) return null;
 
-  const subject = getClaim(principal, 'sub') || getClaim(principal, 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier');
+  const subject =
+    getClaim(principal, 'sub') ||
+    getClaim(
+      principal,
+      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'
+    );
   const email = getClaim(principal, 'emails') || getClaim(principal, 'email');
   const name = principal.userDetails;
 

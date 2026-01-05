@@ -8,17 +8,20 @@ const DEV_USER_COOKIE = 'dev-user-id';
 /**
  * Dev-only endpoint to switch between simulated users.
  * Only works when DEV_AUTH_BYPASS=true.
- * 
+ *
  * POST /api/dev/switch-user
  * Body: { "userId": "dev-user-2" }
- * 
+ *
  * GET /api/dev/switch-user
  * Returns current dev user ID
  */
 
 export async function GET() {
   if (process.env.DEV_AUTH_BYPASS !== 'true') {
-    return NextResponse.json({ error: 'Dev bypass not enabled' }, { status: 403 });
+    return NextResponse.json(
+      { error: 'Dev bypass not enabled' },
+      { status: 403 }
+    );
   }
 
   const cookieStore = cookies();
@@ -29,7 +32,10 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   if (process.env.DEV_AUTH_BYPASS !== 'true') {
-    return NextResponse.json({ error: 'Dev bypass not enabled' }, { status: 403 });
+    return NextResponse.json(
+      { error: 'Dev bypass not enabled' },
+      { status: 403 }
+    );
   }
 
   try {
@@ -37,7 +43,10 @@ export async function POST(request: NextRequest) {
     const userId = body.userId;
 
     if (!userId || typeof userId !== 'string') {
-      return NextResponse.json({ error: 'userId is required' }, { status: 400 });
+      return NextResponse.json(
+        { error: 'userId is required' },
+        { status: 400 }
+      );
     }
 
     // Sanitize userId to prevent issues
@@ -55,25 +64,31 @@ export async function POST(request: NextRequest) {
       maxAge: 60 * 60 * 24 * 30 // 30 days
     });
 
-    return NextResponse.json({ 
+    return NextResponse.json({
       userId: sanitizedUserId,
-      message: `Switched to user: ${sanitizedUserId}` 
+      message: `Switched to user: ${sanitizedUserId}`
     });
   } catch {
-    return NextResponse.json({ error: 'Invalid request body' }, { status: 400 });
+    return NextResponse.json(
+      { error: 'Invalid request body' },
+      { status: 400 }
+    );
   }
 }
 
 export async function DELETE() {
   if (process.env.DEV_AUTH_BYPASS !== 'true') {
-    return NextResponse.json({ error: 'Dev bypass not enabled' }, { status: 403 });
+    return NextResponse.json(
+      { error: 'Dev bypass not enabled' },
+      { status: 403 }
+    );
   }
 
   const cookieStore = cookies();
   cookieStore.delete(DEV_USER_COOKIE);
 
-  return NextResponse.json({ 
+  return NextResponse.json({
     userId: 'dev-user-1',
-    message: 'Reset to default dev user' 
+    message: 'Reset to default dev user'
   });
 }
