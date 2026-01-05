@@ -1,7 +1,13 @@
-"use client";
+'use client';
 
 import React, { useState } from 'react';
-import { SettingsIcon, SunIcon, MoonIcon, BabyIcon, CheckIcon } from '@/components/ui/icons';
+import {
+  SettingsIcon,
+  SunIcon,
+  MoonIcon,
+  BabyIcon,
+  CheckIcon
+} from '@/components/ui/icons';
 import { useTheme } from '@/providers/theme-provider';
 
 export default function SettingsPage() {
@@ -48,9 +54,13 @@ export default function SettingsPage() {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-50 p-5 pb-24 max-w-md mx-auto space-y-5">
       <header className="flex items-center gap-3">
-        <span className="p-2 rounded-xl bg-slate-200 dark:bg-slate-800 text-accent"><SettingsIcon className="w-5 h-5" /></span>
+        <span className="p-2 rounded-xl bg-slate-200 dark:bg-slate-800 text-accent">
+          <SettingsIcon className="w-5 h-5" />
+        </span>
         <div>
-          <p className="text-xs text-slate-500 dark:text-slate-400">Preferences</p>
+          <p className="text-xs text-slate-500 dark:text-slate-400">
+            Preferences
+          </p>
           <h1 className="text-lg font-semibold">Settings</h1>
         </div>
       </header>
@@ -59,10 +69,16 @@ export default function SettingsPage() {
         <div className="flex items-center justify-between">
           <div>
             <p className="font-semibold">Theme</p>
-            <p className="text-xs text-slate-500 dark:text-slate-400">System / Light / Dark</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400">
+              System / Light / Dark
+            </p>
           </div>
           <span className="p-2 rounded-xl bg-slate-100 dark:bg-slate-900/50 text-accent">
-            {resolved === 'dark' ? <MoonIcon className="w-5 h-5" /> : <SunIcon className="w-5 h-5" />}
+            {resolved === 'dark' ? (
+              <MoonIcon className="w-5 h-5" />
+            ) : (
+              <SunIcon className="w-5 h-5" />
+            )}
           </span>
         </div>
         <div className="flex gap-2">
@@ -71,7 +87,9 @@ export default function SettingsPage() {
               key={t}
               onClick={() => setTheme(t as any)}
               className={`flex-1 rounded-full border px-3 py-2 capitalize ${
-                theme === t ? 'border-accent text-accent bg-slate-100 dark:bg-slate-900/50' : 'border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/30'
+                theme === t
+                  ? 'border-accent text-accent bg-slate-100 dark:bg-slate-900/50'
+                  : 'border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/30'
               }`}
             >
               {t}
@@ -82,10 +100,14 @@ export default function SettingsPage() {
 
       <section className="card p-4 space-y-3">
         <div className="flex items-center gap-3">
-          <span className="p-2 rounded-xl bg-slate-100 dark:bg-slate-900/50 text-accent"><BabyIcon className="w-5 h-5" /></span>
+          <span className="p-2 rounded-xl bg-slate-100 dark:bg-slate-900/50 text-accent">
+            <BabyIcon className="w-5 h-5" />
+          </span>
           <div>
             <p className="font-semibold">Baby</p>
-            <p className="text-xs text-slate-500 dark:text-slate-400">Add a baby to start tracking</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400">
+              Add a baby to start tracking
+            </p>
           </div>
         </div>
         <form onSubmit={addBaby} className="space-y-2">
@@ -96,19 +118,30 @@ export default function SettingsPage() {
             className="w-full rounded-xl bg-slate-100 dark:bg-slate-900/60 border border-slate-300 dark:border-slate-700 px-3 py-2 text-slate-900 dark:text-slate-50"
             required
           />
-          <button type="submit" className="w-full rounded-full bg-accent text-slate-900 font-semibold py-2">
+          <button
+            type="submit"
+            className="w-full rounded-full bg-accent text-slate-900 font-semibold py-2"
+          >
             Save baby
           </button>
-          {babyStatus && <p className="text-xs text-slate-600 dark:text-slate-300">{babyStatus}</p>}
+          {babyStatus && (
+            <p className="text-xs text-slate-600 dark:text-slate-300">
+              {babyStatus}
+            </p>
+          )}
         </form>
       </section>
 
       <section className="card p-4 space-y-3">
         <div className="flex items-center gap-3">
-          <span className="p-2 rounded-xl bg-slate-100 dark:bg-slate-900/50 text-accent"><CheckIcon className="w-5 h-5" /></span>
+          <span className="p-2 rounded-xl bg-slate-100 dark:bg-slate-900/50 text-accent">
+            <CheckIcon className="w-5 h-5" />
+          </span>
           <div>
             <p className="font-semibold">Partner invite</p>
-            <p className="text-xs text-slate-500 dark:text-slate-400">Email-based matching only</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400">
+              Email-based matching only
+            </p>
           </div>
         </div>
         <form onSubmit={sendInvite} className="space-y-2">
@@ -120,10 +153,17 @@ export default function SettingsPage() {
             className="w-full rounded-xl bg-slate-100 dark:bg-slate-900/60 border border-slate-300 dark:border-slate-700 px-3 py-2 text-slate-900 dark:text-slate-50"
             required
           />
-          <button type="submit" className="w-full rounded-full bg-accent text-slate-900 font-semibold py-2">
+          <button
+            type="submit"
+            className="w-full rounded-full bg-accent text-slate-900 font-semibold py-2"
+          >
             Send invite
           </button>
-          {inviteStatus && <p className="text-xs text-slate-600 dark:text-slate-300">{inviteStatus}</p>}
+          {inviteStatus && (
+            <p className="text-xs text-slate-600 dark:text-slate-300">
+              {inviteStatus}
+            </p>
+          )}
         </form>
       </section>
 

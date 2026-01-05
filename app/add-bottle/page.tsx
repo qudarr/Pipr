@@ -1,11 +1,17 @@
-"use client";
+'use client';
 
 import React, { useEffect, useState } from 'react';
 import { BottleIcon } from '@/components/ui/icons';
 
 export default function AddBottlePage() {
   const [babies, setBabies] = useState<{ id: string; name: string }[]>([]);
-  const [form, setForm] = useState({ amountMl: 120, bottleType: 'Formula', babyId: '', notes: '', occurredAt: '' });
+  const [form, setForm] = useState({
+    amountMl: 120,
+    bottleType: 'Formula',
+    babyId: '',
+    notes: '',
+    occurredAt: ''
+  });
   const [status, setStatus] = useState<string>('');
 
   useEffect(() => {
@@ -46,7 +52,9 @@ export default function AddBottlePage() {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-50 p-5 pb-24 max-w-md mx-auto">
       <header className="flex items-center gap-3 mb-4">
-        <span className="p-2 rounded-xl bg-slate-200 dark:bg-slate-800 text-accent"><BottleIcon className="w-5 h-5" /></span>
+        <span className="p-2 rounded-xl bg-slate-200 dark:bg-slate-800 text-accent">
+          <BottleIcon className="w-5 h-5" />
+        </span>
         <div>
           <p className="text-xs text-slate-500 dark:text-slate-400">Bottle</p>
           <h1 className="text-lg font-semibold">Add Bottle Feed</h1>
@@ -56,17 +64,23 @@ export default function AddBottlePage() {
       <form onSubmit={submit} className="space-y-4">
         <div className="card p-4 space-y-3">
           <label className="flex flex-col text-sm gap-1">
-            <span className="text-slate-600 dark:text-slate-300">Amount (mL)</span>
+            <span className="text-slate-600 dark:text-slate-300">
+              Amount (mL)
+            </span>
             <input
               type="number"
               value={form.amountMl}
-              onChange={(e) => setForm({ ...form, amountMl: Number(e.target.value) })}
+              onChange={(e) =>
+                setForm({ ...form, amountMl: Number(e.target.value) })
+              }
               className="rounded-xl bg-slate-100 dark:bg-slate-900/60 border border-slate-300 dark:border-slate-700 px-3 py-2 text-slate-900 dark:text-slate-50"
               required
             />
           </label>
           <label className="flex flex-col text-sm gap-1">
-            <span className="text-slate-600 dark:text-slate-300">Bottle type</span>
+            <span className="text-slate-600 dark:text-slate-300">
+              Bottle type
+            </span>
             <select
               value={form.bottleType}
               onChange={(e) => setForm({ ...form, bottleType: e.target.value })}
@@ -89,7 +103,11 @@ export default function AddBottlePage() {
                 </option>
               ))}
             </select>
-            {babies.length === 0 && <p className="text-xs text-amber-500 dark:text-amber-400">Add a baby first in Settings.</p>}
+            {babies.length === 0 && (
+              <p className="text-xs text-amber-500 dark:text-amber-400">
+                Add a baby first in Settings.
+              </p>
+            )}
           </label>
           <label className="flex flex-col text-sm gap-1">
             <span className="text-slate-600 dark:text-slate-300">Time</span>
@@ -101,7 +119,9 @@ export default function AddBottlePage() {
             />
           </label>
           <label className="flex flex-col text-sm gap-1">
-            <span className="text-slate-600 dark:text-slate-300">Notes (optional)</span>
+            <span className="text-slate-600 dark:text-slate-300">
+              Notes (optional)
+            </span>
             <textarea
               value={form.notes}
               onChange={(e) => setForm({ ...form, notes: e.target.value })}
@@ -118,7 +138,11 @@ export default function AddBottlePage() {
         >
           Save Bottle Feed
         </button>
-        {status && <p className="text-sm text-center text-slate-600 dark:text-slate-300">{status}</p>}
+        {status && (
+          <p className="text-sm text-center text-slate-600 dark:text-slate-300">
+            {status}
+          </p>
+        )}
       </form>
     </div>
   );
