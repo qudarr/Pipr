@@ -15,7 +15,11 @@ body {
 }
 
 .card {
-  @apply rounded-3xl shadow-card bg-white/70 dark:bg-slate-900/70 backdrop-blur;
+  @apply rounded-3xl shadow-card bg-white/95 dark:bg-slate-900/70 backdrop-blur;
+}
+
+.card-alt {
+  @apply rounded-3xl shadow-card bg-white/90 dark:bg-slate-800/70 backdrop-blur;
 }
 
 button {

@@ -44,44 +44,44 @@ export default function AddBottlePage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-50 p-5 pb-24 max-w-md mx-auto">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-50 p-5 pb-24 max-w-md mx-auto">
       <header className="flex items-center gap-3 mb-4">
-        <span className="p-2 rounded-xl bg-slate-800 text-accent"><BottleIcon className="w-5 h-5" /></span>
+        <span className="p-2 rounded-xl bg-slate-200 dark:bg-slate-800 text-accent"><BottleIcon className="w-5 h-5" /></span>
         <div>
-          <p className="text-xs text-slate-400">Bottle</p>
+          <p className="text-xs text-slate-500 dark:text-slate-400">Bottle</p>
           <h1 className="text-lg font-semibold">Add Bottle Feed</h1>
         </div>
       </header>
 
       <form onSubmit={submit} className="space-y-4">
-        <div className="card p-4 bg-slate-800/70 space-y-3">
+        <div className="card p-4 space-y-3">
           <label className="flex flex-col text-sm gap-1">
-            <span className="text-slate-300">Amount (mL)</span>
+            <span className="text-slate-600 dark:text-slate-300">Amount (mL)</span>
             <input
               type="number"
               value={form.amountMl}
               onChange={(e) => setForm({ ...form, amountMl: Number(e.target.value) })}
-              className="rounded-xl bg-slate-900/60 border border-slate-700 px-3 py-2 text-slate-50"
+              className="rounded-xl bg-slate-100 dark:bg-slate-900/60 border border-slate-300 dark:border-slate-700 px-3 py-2 text-slate-900 dark:text-slate-50"
               required
             />
           </label>
           <label className="flex flex-col text-sm gap-1">
-            <span className="text-slate-300">Bottle type</span>
+            <span className="text-slate-600 dark:text-slate-300">Bottle type</span>
             <select
               value={form.bottleType}
               onChange={(e) => setForm({ ...form, bottleType: e.target.value })}
-              className="rounded-xl bg-slate-900/60 border border-slate-700 px-3 py-2 text-slate-50"
+              className="rounded-xl bg-slate-100 dark:bg-slate-900/60 border border-slate-300 dark:border-slate-700 px-3 py-2 text-slate-900 dark:text-slate-50"
             >
               <option value="Formula">Formula</option>
               <option value="Breastmilk">Breastmilk</option>
             </select>
           </label>
           <label className="flex flex-col text-sm gap-1">
-            <span className="text-slate-300">Baby</span>
+            <span className="text-slate-600 dark:text-slate-300">Baby</span>
             <select
               value={form.babyId}
               onChange={(e) => setForm({ ...form, babyId: e.target.value })}
-              className="rounded-xl bg-slate-900/60 border border-slate-700 px-3 py-2 text-slate-50"
+              className="rounded-xl bg-slate-100 dark:bg-slate-900/60 border border-slate-300 dark:border-slate-700 px-3 py-2 text-slate-900 dark:text-slate-50"
             >
               {babies.map((b) => (
                 <option key={b.id} value={b.id}>
@@ -89,23 +89,23 @@ export default function AddBottlePage() {
                 </option>
               ))}
             </select>
-            {babies.length === 0 && <p className="text-xs text-amber-400">Add a baby first in Settings.</p>}
+            {babies.length === 0 && <p className="text-xs text-amber-500 dark:text-amber-400">Add a baby first in Settings.</p>}
           </label>
           <label className="flex flex-col text-sm gap-1">
-            <span className="text-slate-300">Time</span>
+            <span className="text-slate-600 dark:text-slate-300">Time</span>
             <input
               type="datetime-local"
               value={form.occurredAt}
               onChange={(e) => setForm({ ...form, occurredAt: e.target.value })}
-              className="rounded-xl bg-slate-900/60 border border-slate-700 px-3 py-2 text-slate-50"
+              className="rounded-xl bg-slate-100 dark:bg-slate-900/60 border border-slate-300 dark:border-slate-700 px-3 py-2 text-slate-900 dark:text-slate-50"
             />
           </label>
           <label className="flex flex-col text-sm gap-1">
-            <span className="text-slate-300">Notes (optional)</span>
+            <span className="text-slate-600 dark:text-slate-300">Notes (optional)</span>
             <textarea
               value={form.notes}
               onChange={(e) => setForm({ ...form, notes: e.target.value })}
-              className="rounded-xl bg-slate-900/60 border border-slate-700 px-3 py-2 text-slate-50"
+              className="rounded-xl bg-slate-100 dark:bg-slate-900/60 border border-slate-300 dark:border-slate-700 px-3 py-2 text-slate-900 dark:text-slate-50"
               rows={3}
               placeholder="Add a note"
             />
@@ -118,7 +118,7 @@ export default function AddBottlePage() {
         >
           Save Bottle Feed
         </button>
-        {status && <p className="text-sm text-center text-slate-300">{status}</p>}
+        {status && <p className="text-sm text-center text-slate-600 dark:text-slate-300">{status}</p>}
       </form>
     </div>
   );
