@@ -72,8 +72,8 @@ resource secretAuthClient 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
   }
 }
 
-// Optional Azure OpenAI secrets (only created if API key is provided)
-resource secretOpenAIApiKey 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = if (!empty(azureOpenAIApiKey)) {
+// Optional Azure OpenAI secrets (only created if all required parameters are provided)
+resource secretOpenAIApiKey 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = if (!empty(azureOpenAIApiKey) && !empty(azureOpenAIEndpoint) && !empty(azureOpenAIDeploymentName)) {
   name: 'azure-openai-api-key'
   parent: keyVault
   properties: {
@@ -156,7 +156,7 @@ resource webApp 'Microsoft.Web/sites@2023-12-01' = {
         }
         {
           name: 'AZURE_OPENAI_API_KEY'
-          value: !empty(azureOpenAIApiKey) ? '@Microsoft.KeyVault(SecretUri=${secretOpenAIApiKey.properties.secretUriWithVersion})' : ''
+          value: (!empty(azureOpenAIApiKey) && !empty(azureOpenAIEndpoint) && !empty(azureOpenAIDeploymentName)) ? '@Microsoft.KeyVault(SecretUri=${secretOpenAIApiKey.properties.secretUriWithVersion})' : ''
         }
         {
           name: 'AZURE_OPENAI_DEPLOYMENT_NAME'
