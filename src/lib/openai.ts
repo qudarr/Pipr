@@ -99,6 +99,10 @@ Keep your response concise (3-4 paragraphs max), supportive, and focused on prac
       }
     ]);
 
+    if (!result.choices || result.choices.length === 0) {
+      throw new Error('No response from Azure OpenAI');
+    }
+
     const insight = result.choices[0]?.message?.content;
     if (!insight) {
       throw new Error('No insights generated');

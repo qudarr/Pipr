@@ -23,6 +23,7 @@ var appInsightsName = '${appName}-ai'
 var planName = '${appName}-plan'
 var webAppName = appName
 var postgresDbConn = 'postgresql://${dbAdminUser}:${dbAdminPassword}@${postgresServerName}.postgres.database.azure.com:5432/${dbName}?sslmode=require'
+var isOpenAIConfigured = !empty(azureOpenAIApiKey) && !empty(azureOpenAIEndpoint) && !empty(azureOpenAIDeploymentName)
 
 resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
   name: appInsightsName
@@ -73,7 +74,7 @@ resource secretAuthClient 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 }
 
 // Optional Azure OpenAI secrets (only created if all required parameters are provided)
-resource secretOpenAIApiKey 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = if (!empty(azureOpenAIApiKey) && !empty(azureOpenAIEndpoint) && !empty(azureOpenAIDeploymentName)) {
+resource secretOpenAIApiKey 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = if (isOpenAIConfigured) {
   name: 'azure-openai-api-key'
   parent: keyVault
   properties: {
@@ -156,7 +157,7 @@ resource webApp 'Microsoft.Web/sites@2023-12-01' = {
         }
         {
           name: 'AZURE_OPENAI_API_KEY'
-          value: (!empty(azureOpenAIApiKey) && !empty(azureOpenAIEndpoint) && !empty(azureOpenAIDeploymentName)) ? '@Microsoft.KeyVault(SecretUri=${secretOpenAIApiKey.properties.secretUriWithVersion})' : ''
+          value: isOpenAIConfigured ? '@Microsoft.KeyVault(SecretUri=${secretOpenAIApiKey.properties.secretUriWithVersion})' : ''
         }
         {
           name: 'AZURE_OPENAI_DEPLOYMENT_NAME'
