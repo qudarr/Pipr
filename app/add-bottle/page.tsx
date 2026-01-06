@@ -1,125 +1,81 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from 'react';
-import { BottleIcon } from '@/components/ui/icons';
+import React from 'react';
+import { useRouter } from 'next/navigation';
+import {
+  BottleIcon,
+  CalendarIcon,
+  HistoryIcon,
+  SettingsIcon
+} from '@/components/ui/icons';
+import BottleForm from '@/components/bottle-form';
 
 export default function AddBottlePage() {
-  const [babies, setBabies] = useState<{ id: string; name: string }[]>([]);
-  const [form, setForm] = useState({ amountMl: 120, bottleType: 'Formula', babyId: '', notes: '', occurredAt: '' });
-  const [status, setStatus] = useState<string>('');
+  const router = useRouter();
 
-  useEffect(() => {
-    fetch('/api/babies')
-      .then((res) => res.json())
-      .then((data) => {
-        setBabies(data.babies ?? []);
-        if (data.babies?.[0]) {
-          setForm((f) => ({ ...f, babyId: data.babies[0].id }));
-        }
-      })
-      .catch(() => setBabies([]));
-  }, []);
-
-  const submit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus('');
-    const res = await fetch('/api/feeds', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        type: 'bottle',
-        babyId: form.babyId,
-        occurredAt: form.occurredAt || undefined,
-        amountMl: Number(form.amountMl),
-        bottleType: form.bottleType,
-        notes: form.notes || undefined
-      })
-    });
-    if (res.ok) {
-      setStatus('Saved');
-    } else {
-      const data = await res.json();
-      setStatus(data.error || 'Failed');
-    }
+  const handleComplete = () => {
+    // Redirect to home after saving
+    router.push('/');
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-50 p-5 pb-24 max-w-md mx-auto">
-      <header className="flex items-center gap-3 mb-4">
-        <span className="p-2 rounded-xl bg-slate-800 text-accent"><BottleIcon className="w-5 h-5" /></span>
-        <div>
-          <p className="text-xs text-slate-400">Bottle</p>
-          <h1 className="text-lg font-semibold">Add Bottle Feed</h1>
-        </div>
-      </header>
+    <div className="min-h-screen baby-gradient-light dark:bg-gradient-to-br dark:from-slate-900 dark:via-purple-950 dark:to-blue-950">
+      <div className="max-w-md mx-auto px-5 pb-24 pt-8">
+        <header className="flex items-center gap-3 mb-6">
+          <div className="p-3 rounded-2xl bg-baby-blue/30 dark:bg-baby-blue/20">
+            <BottleIcon className="w-7 h-7 text-baby-blue" />
+          </div>
+          <div>
+            <p className="text-xs uppercase tracking-wide text-slate-600 dark:text-slate-400 font-semibold">
+              Quick Add
+            </p>
+            <h1 className="text-xl font-bold text-slate-900 dark:text-white">
+              Bottle Feed
+            </h1>
+          </div>
+        </header>
 
-      <form onSubmit={submit} className="space-y-4">
-        <div className="card p-4 bg-slate-800/70 space-y-3">
-          <label className="flex flex-col text-sm gap-1">
-            <span className="text-slate-300">Amount (mL)</span>
-            <input
-              type="number"
-              value={form.amountMl}
-              onChange={(e) => setForm({ ...form, amountMl: Number(e.target.value) })}
-              className="rounded-xl bg-slate-900/60 border border-slate-700 px-3 py-2 text-slate-50"
-              required
-            />
-          </label>
-          <label className="flex flex-col text-sm gap-1">
-            <span className="text-slate-300">Bottle type</span>
-            <select
-              value={form.bottleType}
-              onChange={(e) => setForm({ ...form, bottleType: e.target.value })}
-              className="rounded-xl bg-slate-900/60 border border-slate-700 px-3 py-2 text-slate-50"
+        <BottleForm onComplete={handleComplete} />
+
+        {/* Bottom navigation */}
+        <nav className="fixed bottom-0 left-0 right-0 bg-white/80 dark:bg-slate-900/90 backdrop-blur-lg border-t border-slate-300 dark:border-slate-700 shadow-2xl">
+          <div className="max-w-md mx-auto flex justify-around py-3">
+            <a
+              href="/"
+              className="flex flex-col items-center gap-1.5 text-sm group"
             >
-              <option value="Formula">Formula</option>
-              <option value="Breastmilk">Breastmilk</option>
-            </select>
-          </label>
-          <label className="flex flex-col text-sm gap-1">
-            <span className="text-slate-300">Baby</span>
-            <select
-              value={form.babyId}
-              onChange={(e) => setForm({ ...form, babyId: e.target.value })}
-              className="rounded-xl bg-slate-900/60 border border-slate-700 px-3 py-2 text-slate-50"
+              <span className="p-2 rounded-2xl bg-baby-pink/20 dark:bg-baby-pink/10 text-baby-pink group-hover:bg-baby-pink/30 transition-all">
+                <CalendarIcon className="w-5 h-5" />
+              </span>
+              <span className="font-semibold text-slate-700 dark:text-slate-300 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                Today
+              </span>
+            </a>
+            <a
+              href="/history"
+              className="flex flex-col items-center gap-1.5 text-sm group"
             >
-              {babies.map((b) => (
-                <option key={b.id} value={b.id}>
-                  {b.name}
-                </option>
-              ))}
-            </select>
-            {babies.length === 0 && <p className="text-xs text-amber-400">Add a baby first in Settings.</p>}
-          </label>
-          <label className="flex flex-col text-sm gap-1">
-            <span className="text-slate-300">Time</span>
-            <input
-              type="datetime-local"
-              value={form.occurredAt}
-              onChange={(e) => setForm({ ...form, occurredAt: e.target.value })}
-              className="rounded-xl bg-slate-900/60 border border-slate-700 px-3 py-2 text-slate-50"
-            />
-          </label>
-          <label className="flex flex-col text-sm gap-1">
-            <span className="text-slate-300">Notes (optional)</span>
-            <textarea
-              value={form.notes}
-              onChange={(e) => setForm({ ...form, notes: e.target.value })}
-              className="rounded-xl bg-slate-900/60 border border-slate-700 px-3 py-2 text-slate-50"
-              rows={3}
-              placeholder="Add a note"
-            />
-          </label>
-        </div>
-        <button
-          type="submit"
-          className="w-full rounded-full bg-accent text-slate-900 font-semibold py-3 shadow-card"
-          disabled={!form.babyId || !form.amountMl}
-        >
-          Save Bottle Feed
-        </button>
-        {status && <p className="text-sm text-center text-slate-300">{status}</p>}
-      </form>
+              <span className="p-2 rounded-2xl bg-baby-blue/20 dark:bg-baby-blue/10 text-baby-blue group-hover:bg-baby-blue/30 transition-all">
+                <HistoryIcon className="w-5 h-5" />
+              </span>
+              <span className="font-semibold text-slate-700 dark:text-slate-300 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                History
+              </span>
+            </a>
+            <a
+              href="/settings"
+              className="flex flex-col items-center gap-1.5 text-sm group"
+            >
+              <span className="p-2 rounded-2xl bg-baby-lavender/20 dark:bg-baby-lavender/10 text-baby-lavender group-hover:bg-baby-lavender/30 transition-all">
+                <SettingsIcon className="w-5 h-5" />
+              </span>
+              <span className="font-semibold text-slate-700 dark:text-slate-300 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                Settings
+              </span>
+            </a>
+          </div>
+        </nav>
+      </div>
     </div>
   );
 }

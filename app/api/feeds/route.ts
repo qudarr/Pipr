@@ -41,9 +41,14 @@ export async function GET(req: Request) {
     if (!ctx.membership) return NextResponse.json({ feeds: [] });
 
     const { searchParams } = new URL(req.url);
-    const query = QuerySchema.safeParse(Object.fromEntries(searchParams.entries()));
+    const query = QuerySchema.safeParse(
+      Object.fromEntries(searchParams.entries())
+    );
     if (!query.success) {
-      return NextResponse.json({ error: 'invalid_query', details: query.error.flatten() }, { status: 400 });
+      return NextResponse.json(
+        { error: 'invalid_query', details: query.error.flatten() },
+        { status: 400 }
+      );
     }
 
     const where: any = {
@@ -63,9 +68,27 @@ export async function GET(req: Request) {
       orderBy: { occurredAt: 'desc' }
     });
 
-    return NextResponse.json({ feeds });
+    // Map to consistent API shape (capitalize feedType for UI)
+    const mappedFeeds = feeds.map((f) => ({
+      id: f.id,
+      babyId: f.babyId,
+      occurredAt: f.occurredAt.toISOString(),
+      feedType: f.type === 'bottle' ? 'Bottle' : 'Breast',
+      amountMl: f.bottleAmountMl,
+      bottleType: f.bottleType,
+      firstSide: f.firstSide,
+      firstDurationSec: f.firstDurationSec,
+      secondDurationSec: f.secondDurationSec,
+      totalDurationSec: f.totalDurationSec,
+      autoSwitchUsed: f.autoSwitchUsed,
+      autoStopUsed: f.autoStopUsed,
+      notes: f.notes
+    }));
+
+    return NextResponse.json({ feeds: mappedFeeds });
   } catch (err: any) {
-    if (err?.message === 'UNAUTHENTICATED') return NextResponse.json({ error: 'unauthenticated' }, { status: 401 });
+    if (err?.message === 'UNAUTHENTICATED')
+      return NextResponse.json({ error: 'unauthenticated' }, { status: 401 });
     console.error(err);
     return NextResponse.json({ error: 'server_error' }, { status: 500 });
   }
@@ -74,18 +97,27 @@ export async function GET(req: Request) {
 export async function POST(req: Request) {
   try {
     const ctx = await getAuthContext();
-    if (!ctx.membership) return NextResponse.json({ error: 'no_family' }, { status: 400 });
+    if (!ctx.membership)
+      return NextResponse.json({ error: 'no_family' }, { status: 400 });
 
     const json = await req.json().catch(() => ({}));
     const parsed = CreateFeedSchema.safeParse(json);
-    if (!parsed.success) return NextResponse.json({ error: 'invalid_body', details: parsed.error.flatten() }, { status: 400 });
+    if (!parsed.success)
+      return NextResponse.json(
+        { error: 'invalid_body', details: parsed.error.flatten() },
+        { status: 400 }
+      );
 
-    const baby = await prisma.baby.findUnique({ where: { id: parsed.data.babyId } });
+    const baby = await prisma.baby.findUnique({
+      where: { id: parsed.data.babyId }
+    });
     if (!baby || baby.familySpaceId !== ctx.membership.familySpaceId) {
       return NextResponse.json({ error: 'not_found' }, { status: 404 });
     }
 
-    const occurredAt = parsed.data.occurredAt ? new Date(parsed.data.occurredAt) : new Date();
+    const occurredAt = parsed.data.occurredAt
+      ? new Date(parsed.data.occurredAt)
+      : new Date();
 
     const base = {
       familySpaceId: ctx.membership.familySpaceId,
@@ -118,7 +150,8 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ feed });
   } catch (err: any) {
-    if (err?.message === 'UNAUTHENTICATED') return NextResponse.json({ error: 'unauthenticated' }, { status: 401 });
+    if (err?.message === 'UNAUTHENTICATED')
+      return NextResponse.json({ error: 'unauthenticated' }, { status: 401 });
     console.error(err);
     return NextResponse.json({ error: 'server_error' }, { status: 500 });
   }

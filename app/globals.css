@@ -4,10 +4,22 @@
 
 :root {
   color-scheme: light;
+  --baby-pink: #ffb6d9;
+  --baby-blue: #a7c7e7;
+  --baby-yellow: #fff4a3;
+  --baby-mint: #b4f8c8;
+  --baby-peach: #ffcba4;
+  --baby-lavender: #e0bbe4;
 }
 
 :root.dark {
   color-scheme: dark;
+  --baby-pink: #ff69b4;
+  --baby-blue: #87ceeb;
+  --baby-yellow: #ffe66d;
+  --baby-mint: #77dd77;
+  --baby-peach: #ffab73;
+  --baby-lavender: #d8a7e5;
 }
 
 body {
@@ -15,9 +27,60 @@ body {
 }
 
 .card {
-  @apply rounded-3xl shadow-card bg-white/70 dark:bg-slate-900/70 backdrop-blur;
+  @apply rounded-3xl shadow-card bg-white dark:bg-slate-800 backdrop-blur border border-slate-200 dark:border-slate-700;
 }
 
 button {
   @apply focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-transparent;
+}
+
+.baby-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--baby-pink) 0%,
+    var(--baby-lavender) 50%,
+    var(--baby-blue) 100%
+  );
+}
+
+.baby-gradient-light {
+  background: linear-gradient(135deg, #fff5f7 0%, #f8f4ff 50%, #f0f8ff 100%);
+}
+
+.text-baby-pink {
+  color: var(--baby-pink);
+}
+.text-baby-blue {
+  color: var(--baby-blue);
+}
+.text-baby-yellow {
+  color: var(--baby-yellow);
+}
+.text-baby-mint {
+  color: var(--baby-mint);
+}
+.text-baby-peach {
+  color: var(--baby-peach);
+}
+.text-baby-lavender {
+  color: var(--baby-lavender);
+}
+
+.bg-baby-pink {
+  background-color: var(--baby-pink);
+}
+.bg-baby-blue {
+  background-color: var(--baby-blue);
+}
+.bg-baby-yellow {
+  background-color: var(--baby-yellow);
+}
+.bg-baby-mint {
+  background-color: var(--baby-mint);
+}
+.bg-baby-peach {
+  background-color: var(--baby-peach);
+}
+.bg-baby-lavender {
+  background-color: var(--baby-lavender);
 }
