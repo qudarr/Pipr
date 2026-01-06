@@ -299,10 +299,10 @@ export default function StatsPage() {
                 <div className="text-center py-8">
                   <SparklesIcon className="w-12 h-12 text-purple-300 dark:text-purple-700 mx-auto mb-3" />
                   <p className="text-sm text-slate-500 dark:text-slate-400">
-                    Get AI-powered insights about your baby's feeding patterns
+                    Get AI-powered insights about your baby&apos;s feeding patterns
                   </p>
                   <p className="text-xs text-slate-400 dark:text-slate-500 mt-1">
-                    Click "Generate Insights" to analyze the current time range
+                    Click &quot;Generate Insights&quot; to analyze the current time range
                   </p>
                 </div>
               )}
