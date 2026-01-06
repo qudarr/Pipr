@@ -11,6 +11,25 @@ import {
 import { HistoryIcon, CalendarIcon, SettingsIcon } from '@/components/ui/icons';
 import { useFeeds } from '@/lib/hooks';
 
+// Sparkles icon for AI insights
+function SparklesIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      stroke="currentColor"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 22l-.394-1.433a2.25 2.25 0 0 0-1.423-1.423L13.25 19l1.433-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.433.394 1.433a2.25 2.25 0 0 0 1.423 1.423l1.433.394-1.433.394a2.25 2.25 0 0 0-1.423 1.423Z"
+      />
+    </svg>
+  );
+}
+
 // Chart icon for nav
 function ChartIcon({ className }: { className?: string }) {
   return (
@@ -32,9 +51,18 @@ function ChartIcon({ className }: { className?: string }) {
 
 type TimeRange = '7d' | '14d' | '30d';
 
+type InsightsData = {
+  insights: string;
+  timeRange: string;
+  generatedAt: string;
+};
+
 export default function StatsPage() {
   const { feeds, loading } = useFeeds();
   const [timeRange, setTimeRange] = useState<TimeRange>('7d');
+  const [insights, setInsights] = useState<InsightsData | null>(null);
+  const [loadingInsights, setLoadingInsights] = useState(false);
+  const [insightsError, setInsightsError] = useState<string | null>(null);
 
   const days = timeRange === '7d' ? 7 : timeRange === '14d' ? 14 : 30;
 
@@ -100,6 +128,37 @@ export default function StatsPage() {
       avgMlPerDay
     };
   }, [chartData, days]);
+
+  // Function to generate AI insights
+  const generateInsights = async () => {
+    setLoadingInsights(true);
+    setInsightsError(null);
+
+    try {
+      const response = await fetch('/api/stats/insights', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ timeRange })
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || 'Failed to generate insights');
+      }
+
+      const data = await response.json();
+      setInsights(data);
+    } catch (error: any) {
+      console.error('Error generating insights:', error);
+      setInsightsError(
+        error.message || 'Failed to generate insights. Please try again.'
+      );
+    } finally {
+      setLoadingInsights(false);
+    }
+  };
 
   return (
     <div className="min-h-screen baby-gradient-light dark:bg-gradient-to-br dark:from-slate-900 dark:via-purple-950 dark:to-blue-950">
@@ -191,6 +250,71 @@ export default function StatsPage() {
                   {Math.round(totals.totalBreastMin / days)}m/day avg
                 </p>
               </div>
+            </div>
+
+            {/* AI Insights Section */}
+            <div className="card p-5 shadow-lg mb-6">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-sm font-bold text-slate-700 dark:text-slate-300 flex items-center gap-2">
+                  <SparklesIcon className="w-5 h-5 text-purple-500" />
+                  AI Insights
+                </h2>
+                <button
+                  onClick={generateInsights}
+                  disabled={loadingInsights}
+                  className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-gradient-to-r from-purple-500 to-indigo-500 text-white hover:from-purple-600 hover:to-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-md"
+                >
+                  {loadingInsights ? 'Generating...' : 'Generate Insights'}
+                </button>
+              </div>
+
+              {insights && (
+                <div className="bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-950/30 dark:to-indigo-950/30 rounded-lg p-4 border border-purple-200 dark:border-purple-800">
+                  <div className="prose prose-sm dark:prose-invert max-w-none">
+                    <p className="text-slate-700 dark:text-slate-300 whitespace-pre-wrap leading-relaxed">
+                      {insights.insights}
+                    </p>
+                  </div>
+                  <p className="text-xs text-slate-500 dark:text-slate-500 mt-3 italic">
+                    Generated on{' '}
+                    {new Date(insights.generatedAt).toLocaleString('en-US', {
+                      month: 'short',
+                      day: 'numeric',
+                      hour: 'numeric',
+                      minute: '2-digit'
+                    })}
+                  </p>
+                </div>
+              )}
+
+              {insightsError && (
+                <div className="bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-800 rounded-lg p-4">
+                  <p className="text-sm text-red-600 dark:text-red-400">
+                    {insightsError}
+                  </p>
+                </div>
+              )}
+
+              {!insights && !insightsError && !loadingInsights && (
+                <div className="text-center py-8">
+                  <SparklesIcon className="w-12 h-12 text-purple-300 dark:text-purple-700 mx-auto mb-3" />
+                  <p className="text-sm text-slate-500 dark:text-slate-400">
+                    Get AI-powered insights about your baby's feeding patterns
+                  </p>
+                  <p className="text-xs text-slate-400 dark:text-slate-500 mt-1">
+                    Click "Generate Insights" to analyze the current time range
+                  </p>
+                </div>
+              )}
+
+              {loadingInsights && (
+                <div className="text-center py-8">
+                  <div className="inline-block animate-spin rounded-full h-8 w-8 border-4 border-purple-500 border-t-transparent mb-3"></div>
+                  <p className="text-sm text-slate-500 dark:text-slate-400">
+                    Analyzing your feeding data...
+                  </p>
+                </div>
+              )}
             </div>
 
             {/* Volume Chart */}

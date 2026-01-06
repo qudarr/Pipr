@@ -12,6 +12,11 @@ param authClientId string
 @secure()
 param authClientSecret string
 param authIssuerUri string // e.g. https://login.microsoftonline.com/<tenant-id>/v2.0
+// Optional Azure OpenAI parameters
+param azureOpenAIEndpoint string = ''
+@secure()
+param azureOpenAIApiKey string = ''
+param azureOpenAIDeploymentName string = ''
 
 var kvName = '${appName}-kv'
 var appInsightsName = '${appName}-ai'
@@ -64,6 +69,15 @@ resource secretAuthClient 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
   parent: keyVault
   properties: {
     value: authClientSecret
+  }
+}
+
+// Optional Azure OpenAI secrets (only created if API key is provided)
+resource secretOpenAIApiKey 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = if (!empty(azureOpenAIApiKey)) {
+  name: 'azure-openai-api-key'
+  parent: keyVault
+  properties: {
+    value: azureOpenAIApiKey
   }
 }
 
@@ -134,6 +148,19 @@ resource webApp 'Microsoft.Web/sites@2023-12-01' = {
           // Note: For enhanced security, consider using a CI/CD pipeline to build and deploy artifacts
           name: 'NPM_CONFIG_PRODUCTION'
           value: 'false'
+        }
+        // Optional Azure OpenAI app settings (only if configured)
+        {
+          name: 'AZURE_OPENAI_ENDPOINT'
+          value: azureOpenAIEndpoint
+        }
+        {
+          name: 'AZURE_OPENAI_API_KEY'
+          value: !empty(azureOpenAIApiKey) ? '@Microsoft.KeyVault(SecretUri=${secretOpenAIApiKey.properties.secretUriWithVersion})' : ''
+        }
+        {
+          name: 'AZURE_OPENAI_DEPLOYMENT_NAME'
+          value: azureOpenAIDeploymentName
         }
       ]
     }
