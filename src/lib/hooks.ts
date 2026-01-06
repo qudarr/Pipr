@@ -24,6 +24,14 @@ export type FeedEvent = {
   notes?: string;
 };
 
+export type NappyEvent = {
+  id: string;
+  babyId: string;
+  occurredAt: string;
+  type: 'wet' | 'dirty' | 'both';
+  notes?: string;
+};
+
 export type UserData = {
   user?: {
     id: string;
@@ -108,6 +116,49 @@ export function useTodayFeeds(babyId?: string) {
   tomorrow.setDate(tomorrow.getDate() + 1);
 
   return useFeeds({
+    start: today.toISOString(),
+    end: tomorrow.toISOString(),
+    babyId
+  });
+}
+
+export function useNappies(options?: {
+  start?: string;
+  end?: string;
+  babyId?: string;
+}) {
+  const [nappies, setNappies] = useState<NappyEvent[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const refresh = useCallback(() => {
+    setLoading(true);
+    const params = new URLSearchParams();
+    if (options?.start) params.set('start', options.start);
+    if (options?.end) params.set('end', options.end);
+    if (options?.babyId) params.set('babyId', options.babyId);
+
+    const url = '/api/nappies' + (params.toString() ? `?${params}` : '');
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => setNappies(data.nappies ?? []))
+      .catch(() => setNappies([]))
+      .finally(() => setLoading(false));
+  }, [options?.start, options?.end, options?.babyId]);
+
+  useEffect(() => {
+    refresh();
+  }, [refresh]);
+
+  return { nappies, loading, refresh };
+}
+
+export function useTodayNappies(babyId?: string) {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
+  return useNappies({
     start: today.toISOString(),
     end: tomorrow.toISOString(),
     babyId

@@ -165,3 +165,17 @@ export const EditIcon = (props: React.SVGProps<SVGSVGElement>) => (
     <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
   </svg>
 );
+
+export const NappyIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.6"
+    {...props}
+  >
+    <path d="M4 7c0-1.1.9-2 2-2h12a2 2 0 0 1 2 2v6c0 3.3-2.7 6-6 6h-4c-3.3 0-6-2.7-6-6V7z" />
+    <path d="M8 5v2M16 5v2" />
+    <path d="M9 12h6" />
+  </svg>
+);

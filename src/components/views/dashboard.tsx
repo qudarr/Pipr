@@ -11,11 +11,13 @@ import {
   SettingsIcon,
   SunIcon,
   HeartIcon,
-  CloseIcon
+  CloseIcon,
+  NappyIcon
 } from '../ui/icons';
 import { useTheme } from '@/providers/theme-provider';
 import {
   useTodayFeeds,
+  useTodayNappies,
   useBabies,
   formatTime,
   formatDuration,
@@ -23,9 +25,10 @@ import {
 } from '@/lib/hooks';
 import BreastfeedTimer from '@/components/breastfeed-timer';
 import BottleForm from '@/components/bottle-form';
+import NappyForm from '@/components/nappy-form';
 import FeedEditModal from '@/components/feed-edit-modal';
 
-type ModalType = 'breast' | 'bottle' | null;
+type ModalType = 'breast' | 'bottle' | 'nappy' | null;
 
 export default function Dashboard() {
   const todayLabel = format(new Date(), 'EEEE, MMM d');
@@ -33,6 +36,7 @@ export default function Dashboard() {
   const toggleTheme = () => setTheme(resolved === 'dark' ? 'light' : 'dark');
 
   const { feeds, loading, refresh } = useTodayFeeds();
+  const { nappies, refresh: refreshNappies } = useTodayNappies();
   const { babies } = useBabies();
   const [modal, setModal] = useState<ModalType>(null);
   const [editingFeed, setEditingFeed] = useState<FeedEvent | null>(null);
@@ -44,6 +48,7 @@ export default function Dashboard() {
   const totalBreastMin = Math.round(
     breastFeeds.reduce((sum, f) => sum + (f.totalDurationSec || 0), 0) / 60
   );
+  const totalNappies = nappies.length;
 
   // Recent feeds (last 5)
   const recentFeeds = [...feeds]
@@ -56,6 +61,7 @@ export default function Dashboard() {
   const handleComplete = () => {
     setModal(null);
     refresh();
+    refreshNappies();
   };
 
   const handleEditComplete = () => {
@@ -116,33 +122,45 @@ export default function Dashboard() {
 
         {/* Quick add buttons */}
         <section className="mb-6">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-3 gap-3">
             <button
               onClick={() => setModal('breast')}
-              className="card p-5 baby-gradient shadow-xl hover:shadow-2xl transition-all transform hover:scale-105 text-left"
+              className="card p-4 baby-gradient shadow-xl hover:shadow-2xl transition-all transform hover:scale-105 text-left"
             >
-              <div className="flex items-center gap-3">
+              <div className="flex flex-col items-center gap-2">
                 <span className="p-2.5 rounded-2xl bg-white/20">
                   <HeartIcon className="w-6 h-6 text-white" />
                 </span>
-                <div>
-                  <span className="font-bold text-white block">Breastfeed</span>
-                  <span className="text-white/80 text-sm">Start timer</span>
+                <div className="text-center">
+                  <span className="font-bold text-white block text-sm">Breastfeed</span>
                 </div>
               </div>
             </button>
 
             <button
               onClick={() => setModal('bottle')}
-              className="card p-5 bg-gradient-to-br from-sky-500 to-teal-500 shadow-xl hover:shadow-2xl transition-all transform hover:scale-105 text-left"
+              className="card p-4 bg-gradient-to-br from-sky-500 to-teal-500 shadow-xl hover:shadow-2xl transition-all transform hover:scale-105 text-left"
             >
-              <div className="flex items-center gap-3">
+              <div className="flex flex-col items-center gap-2">
                 <span className="p-2.5 rounded-2xl bg-white/20">
                   <BottleIcon className="w-6 h-6 text-white" />
                 </span>
-                <div>
-                  <span className="font-bold text-white block">Bottle</span>
-                  <span className="text-white/80 text-sm">Quick add</span>
+                <div className="text-center">
+                  <span className="font-bold text-white block text-sm">Bottle</span>
+                </div>
+              </div>
+            </button>
+
+            <button
+              onClick={() => setModal('nappy')}
+              className="card p-4 bg-gradient-to-br from-amber-500 to-orange-500 shadow-xl hover:shadow-2xl transition-all transform hover:scale-105 text-left"
+            >
+              <div className="flex flex-col items-center gap-2">
+                <span className="p-2.5 rounded-2xl bg-white/20">
+                  <NappyIcon className="w-6 h-6 text-white" />
+                </span>
+                <div className="text-center">
+                  <span className="font-bold text-white block text-sm">Nappy</span>
                 </div>
               </div>
             </button>
@@ -154,37 +172,47 @@ export default function Dashboard() {
           <p className="text-sm font-semibold text-slate-600 dark:text-slate-400 mb-3">
             Today's Summary
           </p>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-4 gap-3">
             <div className="text-center">
               <div className="inline-flex p-2 rounded-2xl bg-baby-pink/20 dark:bg-baby-pink/10 mb-2">
-                <p className="text-3xl font-bold text-baby-pink">
+                <p className="text-2xl font-bold text-baby-pink">
                   {feeds.length}
                 </p>
               </div>
-              <p className="text-sm font-semibold text-slate-700 dark:text-slate-300">
+              <p className="text-xs font-semibold text-slate-700 dark:text-slate-300">
                 Feeds
               </p>
             </div>
             <div className="text-center">
               <div className="inline-flex p-2 rounded-2xl bg-baby-blue/20 dark:bg-baby-blue/10 mb-2">
-                <p className="text-2xl font-bold text-baby-blue">
+                <p className="text-xl font-bold text-baby-blue">
                   {totalMl}
-                  <span className="text-lg">ml</span>
+                  <span className="text-sm">ml</span>
                 </p>
               </div>
-              <p className="text-sm font-semibold text-slate-700 dark:text-slate-300">
+              <p className="text-xs font-semibold text-slate-700 dark:text-slate-300">
                 Bottles
               </p>
             </div>
             <div className="text-center">
               <div className="inline-flex p-2 rounded-2xl bg-baby-lavender/20 dark:bg-baby-lavender/10 mb-2">
-                <p className="text-2xl font-bold text-baby-lavender">
+                <p className="text-xl font-bold text-baby-lavender">
                   {totalBreastMin}
-                  <span className="text-lg">m</span>
+                  <span className="text-sm">m</span>
                 </p>
               </div>
-              <p className="text-sm font-semibold text-slate-700 dark:text-slate-300">
+              <p className="text-xs font-semibold text-slate-700 dark:text-slate-300">
                 Nursing
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="inline-flex p-2 rounded-2xl bg-amber-500/20 dark:bg-amber-500/10 mb-2">
+                <p className="text-2xl font-bold text-amber-500">
+                  {totalNappies}
+                </p>
+              </div>
+              <p className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+                Nappies
               </p>
             </div>
           </div>
@@ -360,6 +388,23 @@ export default function Dashboard() {
               </button>
             </div>
             <BottleForm onComplete={handleComplete} />
+          </div>
+        </div>
+      )}
+
+      {/* Modal for nappy form */}
+      {modal === 'nappy' && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="w-full max-w-md">
+            <div className="flex justify-end mb-2">
+              <button
+                onClick={() => setModal(null)}
+                className="p-2 rounded-full bg-white/20 text-white hover:bg-white/30"
+              >
+                <CloseIcon className="w-6 h-6" />
+              </button>
+            </div>
+            <NappyForm onComplete={handleComplete} />
           </div>
         </div>
       )}

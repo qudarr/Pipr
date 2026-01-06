@@ -40,6 +40,12 @@ enum BreastSide {
   Right
 }
 
+enum NappyType {
+  wet
+  dirty
+  both
+}
+
 model User {
   id             String            @id @default(cuid())
   externalSubject String            @unique
@@ -50,6 +56,7 @@ model User {
   updatedAt      DateTime          @updatedAt
   memberships    FamilyMembership[]
   feedEvents     FeedEvent[]       @relation("UserFeedEvents")
+  nappyEvents    NappyEvent[]      @relation("UserNappyEvents")
 }
 
 model FamilySpace {
@@ -61,6 +68,7 @@ model FamilySpace {
   invites      Invite[]
   babies       Baby[]
   feedEvents   FeedEvent[]
+  nappyEvents  NappyEvent[]
 }
 
 model FamilyMembership {
@@ -97,6 +105,7 @@ model Baby {
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
   feedEvents    FeedEvent[]
+  nappyEvents   NappyEvent[]
 }
 
 model FeedEvent {
@@ -120,6 +129,23 @@ model FeedEvent {
   autoStopUsed     Boolean        @default(false)
   createdAt        DateTime       @default(now())
   updatedAt        DateTime       @updatedAt
+
+  @@index([familySpaceId, babyId, occurredAt])
+}
+
+model NappyEvent {
+  id               String      @id @default(cuid())
+  familySpace      FamilySpace @relation(fields: [familySpaceId], references: [id])
+  familySpaceId    String
+  baby             Baby        @relation(fields: [babyId], references: [id])
+  babyId           String
+  occurredAt       DateTime    @default(now())
+  type             NappyType
+  createdBy        User        @relation("UserNappyEvents", fields: [createdByUserId], references: [id])
+  createdByUserId  String
+  notes            String?
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
 
   @@index([familySpaceId, babyId, occurredAt])
 }
