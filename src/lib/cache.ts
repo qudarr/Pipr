@@ -1,10 +1,12 @@
 /**
  * Offline-first data cache using IndexedDB for persistent storage
+ * Falls back to localStorage if IndexedDB is not available
  * Provides fast local access and background sync capabilities
  */
 
 const DB_NAME = 'pipr-cache';
 const DB_VERSION = 1;
+const LS_PREFIX = 'pipr_';
 
 // Store names
 const STORES = {
@@ -23,58 +25,104 @@ type SyncOperation = {
   retries: number;
 };
 
+// Check if IndexedDB is available
+const hasIndexedDB = typeof window !== 'undefined' && 'indexedDB' in window;
+
 class CacheDB {
   private db: IDBDatabase | null = null;
   private initPromise: Promise<void> | null = null;
+  private useLocalStorage = false;
 
   async init(): Promise<void> {
+    if (typeof window === 'undefined') return;
+    
     if (this.db) return;
     if (this.initPromise) return this.initPromise;
 
-    this.initPromise = new Promise((resolve, reject) => {
-      const request = indexedDB.open(DB_NAME, DB_VERSION);
+    // Try IndexedDB first
+    if (hasIndexedDB) {
+      this.initPromise = new Promise((resolve, reject) => {
+        const request = indexedDB.open(DB_NAME, DB_VERSION);
 
-      request.onerror = () => reject(request.error);
-      request.onsuccess = () => {
-        this.db = request.result;
-        resolve();
-      };
+        request.onerror = () => {
+          console.warn('[Cache] IndexedDB failed, falling back to localStorage');
+          this.useLocalStorage = true;
+          resolve();
+        };
+        
+        request.onsuccess = () => {
+          this.db = request.result;
+          resolve();
+        };
 
-      request.onupgradeneeded = (event) => {
-        const db = (event.target as IDBOpenDBRequest).result;
+        request.onupgradeneeded = (event) => {
+          const db = (event.target as IDBOpenDBRequest).result;
 
-        // Feeds store
-        if (!db.objectStoreNames.contains(STORES.FEEDS)) {
-          const feedStore = db.createObjectStore(STORES.FEEDS, { keyPath: 'id' });
-          feedStore.createIndex('babyId', 'babyId', { unique: false });
-          feedStore.createIndex('occurredAt', 'occurredAt', { unique: false });
-          feedStore.createIndex('familySpaceId', 'familySpaceId', { unique: false });
-        }
+          // Feeds store
+          if (!db.objectStoreNames.contains(STORES.FEEDS)) {
+            const feedStore = db.createObjectStore(STORES.FEEDS, { keyPath: 'id' });
+            feedStore.createIndex('babyId', 'babyId', { unique: false });
+            feedStore.createIndex('occurredAt', 'occurredAt', { unique: false });
+            feedStore.createIndex('familySpaceId', 'familySpaceId', { unique: false });
+          }
 
-        // Babies store
-        if (!db.objectStoreNames.contains(STORES.BABIES)) {
-          db.createObjectStore(STORES.BABIES, { keyPath: 'id' });
-        }
+          // Babies store
+          if (!db.objectStoreNames.contains(STORES.BABIES)) {
+            db.createObjectStore(STORES.BABIES, { keyPath: 'id' });
+          }
 
-        // User store
-        if (!db.objectStoreNames.contains(STORES.USER)) {
-          db.createObjectStore(STORES.USER, { keyPath: 'id' });
-        }
+          // User store
+          if (!db.objectStoreNames.contains(STORES.USER)) {
+            db.createObjectStore(STORES.USER, { keyPath: 'id' });
+          }
 
-        // Sync queue store
-        if (!db.objectStoreNames.contains(STORES.SYNC_QUEUE)) {
-          const syncStore = db.createObjectStore(STORES.SYNC_QUEUE, { keyPath: 'id' });
-          syncStore.createIndex('timestamp', 'timestamp', { unique: false });
-        }
-      };
-    });
+          // Sync queue store
+          if (!db.objectStoreNames.contains(STORES.SYNC_QUEUE)) {
+            const syncStore = db.createObjectStore(STORES.SYNC_QUEUE, { keyPath: 'id' });
+            syncStore.createIndex('timestamp', 'timestamp', { unique: false });
+          }
+        };
+      });
+    } else {
+      // Use localStorage
+      this.useLocalStorage = true;
+      this.initPromise = Promise.resolve();
+    }
 
     return this.initPromise;
+  }
+
+  // LocalStorage helpers
+  private getLSKey(storeName: string, key?: string): string {
+    return key ? `${LS_PREFIX}${storeName}_${key}` : `${LS_PREFIX}${storeName}`;
+  }
+
+  private getLSStore(storeName: string): any[] {
+    try {
+      const data = localStorage.getItem(this.getLSKey(storeName));
+      return data ? JSON.parse(data) : [];
+    } catch {
+      return [];
+    }
+  }
+
+  private setLSStore(storeName: string, data: any[]): void {
+    try {
+      localStorage.setItem(this.getLSKey(storeName), JSON.stringify(data));
+    } catch (e) {
+      console.error('[Cache] localStorage write failed:', e);
+    }
   }
 
   // Generic get/put operations
   async get<T>(storeName: string, key: string): Promise<T | null> {
     await this.init();
+    
+    if (this.useLocalStorage) {
+      const items = this.getLSStore(storeName);
+      return items.find((item: any) => item.id === key) || null;
+    }
+
     return new Promise((resolve, reject) => {
       const transaction = this.db!.transaction(storeName, 'readonly');
       const store = transaction.objectStore(storeName);
@@ -87,6 +135,11 @@ class CacheDB {
 
   async getAll<T>(storeName: string): Promise<T[]> {
     await this.init();
+    
+    if (this.useLocalStorage) {
+      return this.getLSStore(storeName);
+    }
+
     return new Promise((resolve, reject) => {
       const transaction = this.db!.transaction(storeName, 'readonly');
       const store = transaction.objectStore(storeName);
@@ -99,6 +152,19 @@ class CacheDB {
 
   async put(storeName: string, value: any): Promise<void> {
     await this.init();
+    
+    if (this.useLocalStorage) {
+      const items = this.getLSStore(storeName);
+      const index = items.findIndex((item: any) => item.id === value.id);
+      if (index >= 0) {
+        items[index] = value;
+      } else {
+        items.push(value);
+      }
+      this.setLSStore(storeName, items);
+      return;
+    }
+
     return new Promise((resolve, reject) => {
       const transaction = this.db!.transaction(storeName, 'readwrite');
       const store = transaction.objectStore(storeName);
@@ -111,6 +177,14 @@ class CacheDB {
 
   async delete(storeName: string, key: string): Promise<void> {
     await this.init();
+    
+    if (this.useLocalStorage) {
+      const items = this.getLSStore(storeName);
+      const filtered = items.filter((item: any) => item.id !== key);
+      this.setLSStore(storeName, filtered);
+      return;
+    }
+
     return new Promise((resolve, reject) => {
       const transaction = this.db!.transaction(storeName, 'readwrite');
       const store = transaction.objectStore(storeName);
@@ -123,6 +197,12 @@ class CacheDB {
 
   async clear(storeName: string): Promise<void> {
     await this.init();
+    
+    if (this.useLocalStorage) {
+      this.setLSStore(storeName, []);
+      return;
+    }
+
     return new Promise((resolve, reject) => {
       const transaction = this.db!.transaction(storeName, 'readwrite');
       const store = transaction.objectStore(storeName);

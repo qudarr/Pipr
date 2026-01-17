@@ -30,11 +30,8 @@ export function PWAProvider({ children }: { children: React.ReactNode }) {
     }
 
     // Listen for app install prompt
-    let deferredPrompt: any;
-    
     window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault();
-      deferredPrompt = e;
       console.log('[PWA] Install prompt available');
       
       // You could show a custom install button here
@@ -43,7 +40,6 @@ export function PWAProvider({ children }: { children: React.ReactNode }) {
 
     window.addEventListener('appinstalled', () => {
       console.log('[PWA] App installed');
-      deferredPrompt = null;
     });
 
     // Handle iOS standalone mode
