@@ -12,7 +12,7 @@ class SyncManager {
   private syncStatus: SyncStatus = 'idle';
   private connectionStatus: ConnectionStatus = 'online';
   private syncInterval: NodeJS.Timeout | null = null;
-  private listeners: Set<(status: { sync: SyncStatus; connection: ConnectionStatus }) => void> = new Set();
+  private listeners: Set<(_status: { sync: SyncStatus; connection: ConnectionStatus }) => void> = new Set();
 
   constructor() {
     if (typeof window !== 'undefined') {
@@ -59,7 +59,7 @@ class SyncManager {
     });
   }
 
-  subscribe(listener: (status: { sync: SyncStatus; connection: ConnectionStatus }) => void) {
+  subscribe(listener: (_status: { sync: SyncStatus; connection: ConnectionStatus }) => void) {
     this.listeners.add(listener);
     // Immediately notify with current status
     listener({

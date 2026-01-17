@@ -41,7 +41,7 @@ class CacheDB {
 
     // Try IndexedDB first
     if (hasIndexedDB) {
-      this.initPromise = new Promise((resolve, reject) => {
+      this.initPromise = new Promise((resolve) => {
         const request = indexedDB.open(DB_NAME, DB_VERSION);
 
         request.onerror = () => {
