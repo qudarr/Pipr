@@ -2,6 +2,8 @@
 
 import { useEffect } from 'react';
 
+const UPDATE_CHECK_INTERVAL_MS = 60000; // 1 minute
+
 export function PWAProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     // Register service worker
@@ -14,7 +16,7 @@ export function PWAProvider({ children }: { children: React.ReactNode }) {
           // Check for updates periodically
           setInterval(() => {
             registration.update();
-          }, 60000); // Every minute
+          }, UPDATE_CHECK_INTERVAL_MS);
         })
         .catch((error) => {
           console.error('[PWA] Service worker registration failed:', error);

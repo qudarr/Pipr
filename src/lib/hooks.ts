@@ -228,7 +228,7 @@ export function useOnlineStatus() {
 // Helper to create feed with optimistic update
 export async function createFeed(feedData: any): Promise<void> {
   // Generate temporary ID for optimistic update
-  const tempId = `temp-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+  const tempId = `temp-${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
   
   const optimisticFeed = {
     id: tempId,

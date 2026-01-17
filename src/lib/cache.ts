@@ -215,7 +215,7 @@ class CacheDB {
 
   // Sync queue operations
   async addToSyncQueue(operation: Omit<SyncOperation, 'id' | 'timestamp' | 'retries'>): Promise<string> {
-    const id = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    const id = `${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
     const syncOp: SyncOperation = {
       id,
       ...operation,
@@ -262,9 +262,7 @@ export const cache = {
   },
 
   async saveFeeds(feeds: any[]): Promise<void> {
-    for (const feed of feeds) {
-      await cacheDB.put(STORES.FEEDS, feed);
-    }
+    await Promise.all(feeds.map(feed => this.put(STORES.FEEDS, feed)));
   },
 
   async deleteFeed(id: string): Promise<void> {
@@ -281,9 +279,7 @@ export const cache = {
   },
 
   async saveBabies(babies: any[]): Promise<void> {
-    for (const baby of babies) {
-      await cacheDB.put(STORES.BABIES, baby);
-    }
+    await Promise.all(babies.map(baby => this.put(STORES.BABIES, baby)));
   },
 
   // User

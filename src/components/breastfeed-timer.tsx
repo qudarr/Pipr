@@ -11,6 +11,8 @@ type BreastfeedTimerProps = {
   autoStopMinutes?: number;
 };
 
+const SUCCESS_DISPLAY_DURATION_MS = 2000;
+
 export default function BreastfeedTimer({
   onComplete,
   autoSwitchMinutes = 20,
@@ -104,7 +106,7 @@ export default function BreastfeedTimer({
           setShowSuccess(false);
           handleReset();
           onComplete?.();
-        }, 2000);
+        }, SUCCESS_DISPLAY_DURATION_MS);
       } catch (e) {
         console.error('Failed to save feed', e);
       } finally {

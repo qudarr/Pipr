@@ -8,6 +8,10 @@ import { cache } from './cache';
 type SyncStatus = 'idle' | 'syncing' | 'error';
 type ConnectionStatus = 'online' | 'offline';
 
+const MAX_RETRY_ATTEMPTS = 5;
+const SYNC_INTERVAL_MS = 30000; // 30 seconds
+const ERROR_RESET_DELAY_MS = 5000; // 5 seconds
+
 class SyncManager {
   private syncStatus: SyncStatus = 'idle';
   private connectionStatus: ConnectionStatus = 'online';
@@ -47,7 +51,7 @@ class SyncManager {
       if (this.connectionStatus === 'online') {
         this.sync();
       }
-    }, 30000);
+    }, SYNC_INTERVAL_MS);
   }
 
   private notifyListeners() {
@@ -97,8 +101,8 @@ class SyncManager {
           // Update retry count
           operation.retries += 1;
           
-          // Remove if too many retries (more than 5)
-          if (operation.retries > 5) {
+          // Remove if too many retries
+          if (operation.retries > MAX_RETRY_ATTEMPTS) {
             console.error('[Sync] Max retries reached, removing operation');
             await cache.removeSyncOperation(operation.id);
           } else {
@@ -122,7 +126,7 @@ class SyncManager {
       setTimeout(() => {
         this.syncStatus = 'idle';
         this.notifyListeners();
-      }, 5000);
+      }, ERROR_RESET_DELAY_MS);
     }
   }
 
