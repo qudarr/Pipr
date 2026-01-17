@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { CloseIcon, TrashIcon } from '@/components/ui/icons';
-import { FeedEvent } from '@/lib/hooks';
+import { FeedEvent, updateFeed, deleteFeed } from '@/lib/hooks';
 
 type FeedEditModalProps = {
   feed: FeedEvent;
@@ -48,31 +48,22 @@ export function FeedEditModal({
     setError(null);
 
     try {
-      const body: Record<string, unknown> = {
+      const updates: Record<string, unknown> = {
         notes: notes.trim() || undefined
       };
 
       if (isBottle) {
-        body.amountMl = amountMl;
-        body.bottleType = bottleType;
+        updates.amountMl = amountMl;
+        updates.bottleType = bottleType;
       } else {
-        body.firstSide = firstSide;
-        body.firstDurationSec = firstDurationMin * 60;
-        body.secondDurationSec = secondDurationMin * 60;
-        body.totalDurationSec = (firstDurationMin + secondDurationMin) * 60;
+        updates.firstSide = firstSide;
+        updates.firstDurationSec = firstDurationMin * 60;
+        updates.secondDurationSec = secondDurationMin * 60;
+        updates.totalDurationSec = (firstDurationMin + secondDurationMin) * 60;
       }
 
-      const res = await fetch(`/api/feeds/${feed.id}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body)
-      });
-
-      if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error || 'Failed to save');
-      }
-
+      // Use optimistic update
+      await updateFeed(feed.id, updates);
       onSave();
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Failed to save');
@@ -86,13 +77,8 @@ export function FeedEditModal({
     setError(null);
 
     try {
-      const res = await fetch(`/api/feeds/${feed.id}`, { method: 'DELETE' });
-
-      if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error || 'Failed to delete');
-      }
-
+      // Use optimistic delete
+      await deleteFeed(feed.id);
       onDelete();
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Failed to delete');
