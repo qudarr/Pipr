@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { useBabies } from '@/lib/hooks';
+import { useBabies, createFeed } from '@/lib/hooks';
 
 type Side = 'Left' | 'Right';
 
@@ -10,6 +10,8 @@ type BreastfeedTimerProps = {
   autoSwitchMinutes?: number;
   autoStopMinutes?: number;
 };
+
+const SUCCESS_DISPLAY_DURATION_MS = 2000;
 
 export default function BreastfeedTimer({
   onComplete,
@@ -85,30 +87,26 @@ export default function BreastfeedTimer({
 
       setSaving(true);
       try {
-        const res = await fetch('/api/feeds', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            type: 'breast',
-            babyId: selectedBabyId,
-            occurredAt: startTime?.toISOString(),
-            firstSide,
-            firstDurationSec: firstSideTime,
-            secondDurationSec: secondSideTime > 0 ? secondSideTime : undefined,
-            totalDurationSec: firstSideTime + secondSideTime,
-            autoSwitchUsed,
-            autoStopUsed: autoTriggered
-          })
+        // Use optimistic update - saves immediately to cache and syncs in background
+        await createFeed({
+          type: 'breast',
+          babyId: selectedBabyId,
+          occurredAt: startTime?.toISOString(),
+          firstSide,
+          firstDurationSec: firstSideTime,
+          secondDurationSec: secondSideTime > 0 ? secondSideTime : undefined,
+          totalDurationSec: firstSideTime + secondSideTime,
+          autoSwitchUsed,
+          autoStopUsed: autoTriggered,
+          feedType: 'Breast' // For UI display
         });
 
-        if (res.ok) {
-          setShowSuccess(true);
-          setTimeout(() => {
-            setShowSuccess(false);
-            handleReset();
-            onComplete?.();
-          }, 2000);
-        }
+        setShowSuccess(true);
+        setTimeout(() => {
+          setShowSuccess(false);
+          handleReset();
+          onComplete?.();
+        }, SUCCESS_DISPLAY_DURATION_MS);
       } catch (e) {
         console.error('Failed to save feed', e);
       } finally {

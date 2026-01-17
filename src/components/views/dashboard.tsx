@@ -24,6 +24,7 @@ import {
 import BreastfeedTimer from '@/components/breastfeed-timer';
 import BottleForm from '@/components/bottle-form';
 import FeedEditModal from '@/components/feed-edit-modal';
+import { ConnectionStatus } from '@/components/connection-status';
 
 type ModalType = 'breast' | 'bottle' | null;
 
@@ -70,6 +71,7 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen baby-gradient-light dark:bg-gradient-to-br dark:from-slate-900 dark:via-purple-950 dark:to-blue-950">
+      <ConnectionStatus />
       <div className="max-w-md mx-auto px-5 pb-24 pt-8">
         <header className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">

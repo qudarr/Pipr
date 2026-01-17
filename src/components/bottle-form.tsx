@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useBabies } from '@/lib/hooks';
+import { useBabies, createFeed } from '@/lib/hooks';
 
 type BottleType = 'Formula' | 'Breastmilk';
 
@@ -49,23 +49,16 @@ export default function BottleForm({
     setError(null);
 
     try {
-      const res = await fetch('/api/feeds', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          type: 'bottle',
-          babyId: selectedBabyId,
-          occurredAt: new Date().toISOString(),
-          amountMl,
-          bottleType,
-          notes: notes.trim() || undefined
-        })
+      // Use optimistic update - saves immediately to cache and syncs in background
+      await createFeed({
+        type: 'bottle',
+        babyId: selectedBabyId,
+        occurredAt: new Date().toISOString(),
+        amountMl,
+        bottleType,
+        notes: notes.trim() || undefined,
+        feedType: 'Bottle' // For UI display
       });
-
-      if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error || 'Failed to save');
-      }
 
       // Save the amount to localStorage for next time
       localStorage.setItem('lastBottleAmount', amountMl.toString());
